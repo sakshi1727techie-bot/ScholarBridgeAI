@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Document</title>
+</head>
+<body>
+
+<h1>Upload Document</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <label>Document Type:</label>
+
+    <select name="document_type" required>
+
+        <option value="">Select Document</option>
+        <option value="AADHAAR">Aadhaar Card</option>
+        <option value="PAN">PAN Card</option>
+        <option value="MARKSHEET">Marksheet</option>
+        <option value="INCOME_CERTIFICATE">Income Certificate</option>
+        <option value="CASTE_CERTIFICATE">Caste Certificate</option>
+        <option value="ADMISSION_PROOF">Admission Proof</option>
+        <option value="FEE_RECEIPT">Fee Receipt</option>
+        <option value="BANK_PROOF">Bank Account Proof</option>
+        <option value="OTHER">Other</option>
+
+    </select>
+
+    <br><br>
+
+    <label>Select File:</label>
+
+    <input
+        type="file"
+        name="document"
+        required
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Upload Document
+    </button>
+
+</form>
+
+<br>
+
+<a href="{% url 'my_documents' %}">
+    Back to My Documents
+</a>
+
+</body>
+</html>

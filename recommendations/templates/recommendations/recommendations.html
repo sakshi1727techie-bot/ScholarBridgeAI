@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommended Scholarships</title>
+</head>
+
+<body>
+
+    <h1>🎓 Recommended Scholarships</h1>
+
+    <p>
+        Scholarships recommended based on your profile.
+    </p>
+
+    <hr>
+
+    {% if recommendations %}
+
+        {% for recommendation in recommendations %}
+
+            <div>
+
+                <h2>
+                    {{ recommendation.scholarship.title }}
+                </h2>
+
+                <p>
+                    <strong>Scholarship Amount:</strong>
+                    ₹{{ recommendation.scholarship.amount }}
+                </p>
+
+                <p>
+                    <strong>Match Score:</strong>
+                    {{ recommendation.match_score }}%
+                </p>
+
+                <p>
+                    <strong>Why this scholarship matches you:</strong>
+                    {{ recommendation.reason }}
+                </p>
+
+                <p>
+                    <strong>Deadline:</strong>
+                    {{ recommendation.scholarship.deadline }}
+                </p>
+
+                <a href="{% url 'scholarship_detail' recommendation.scholarship.id %}">
+                    View Scholarship
+                </a>
+
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            No suitable scholarships found for your profile.
+        </p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{% url 'student_dashboard' %}">
+        ← Back to Student Dashboard
+    </a>
+
+</body>
+</html>

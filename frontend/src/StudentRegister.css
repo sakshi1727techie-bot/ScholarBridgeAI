@@ -1,0 +1,604 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================
+   PAGE
+   ========================= */
+
+.register-page {
+    width: 100%;
+    min-height: 100vh;
+    background: #f8f8fc;
+    color: #18213d;
+    font-family: "Plus Jakarta Sans", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.register-header {
+    height: 48px;
+    flex-shrink: 0;
+    background: #ffffff;
+    border-bottom: 1px solid #e8e9f1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.register-brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #5870a5;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.register-brand-icon {
+    font-size: 15px;
+}
+
+.register-security-badge {
+    font-size: 8px;
+    color: #8a8fa3;
+    letter-spacing: 0.4px;
+    background: #fafaff;
+    border: 1px solid #ececf5;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* =========================
+   MAIN
+   ========================= */
+
+.register-main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 25px 15px;
+}
+
+/* =========================
+   CONTAINER
+   ========================= */
+
+.register-container {
+    width: 100%;
+    max-width: 1060px;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    box-shadow: 0 20px 45px rgba(45, 55, 90, 0.15);
+}
+
+/* =========================
+   LEFT IMAGE
+   ========================= */
+
+.register-image-section {
+    position: sticky;
+    top: 25px;
+    height: 650px;
+    overflow: hidden;
+    color: white;
+}
+
+.register-student-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.register-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(5, 15, 35, 0.08) 25%,
+            rgba(5, 15, 35, 0.15) 45%,
+            rgba(5, 15, 35, 0.84) 100%);
+}
+
+/* =========================
+   IMAGE BADGES
+   ========================= */
+
+.register-image-top-badges {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    right: 22px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.register-image-top-badges span {
+    background: rgba(50, 65, 85, 0.65);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    padding: 5px 11px;
+    font-size: 8px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* =========================
+   IMAGE CONTENT
+   ========================= */
+
+.register-image-content {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 25px;
+}
+
+.register-small-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.register-image-content h1 {
+    margin: 0;
+    font-size: 29px;
+    line-height: 0.98;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.register-image-content p {
+    max-width: 350px;
+    margin: 12px 0 16px;
+    font-size: 10px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.register-image-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.register-image-features span {
+    font-size: 7px;
+    font-weight: 600;
+    color: white;
+}
+
+/* =========================
+   RIGHT FORM SECTION
+   ========================= */
+
+.register-form-section {
+    background: #ffffff;
+    padding: 35px 42px;
+}
+
+.register-form-wrapper {
+    width: 100%;
+    max-width: 365px;
+    margin: 0 auto;
+}
+
+/* =========================
+   VALIDATION MESSAGES
+   ========================= */
+
+.register-validation-error {
+    margin: 4px 0 0;
+    padding: 0;
+    color: #d33a3a;
+    font-size: 8px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.register-terms-error {
+    margin-top: -8px;
+    margin-bottom: 12px;
+}
+
+/* =========================
+   LOGO
+   ========================= */
+
+.register-institution-logo {
+    width: 28px;
+    height: 28px;
+    background: #092d7d;
+    color: white;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    margin-bottom: -24px;
+}
+
+.register-institution-info {
+    margin-left: 39px;
+    display: flex;
+    flex-direction: column;
+}
+
+.register-institution-info strong {
+    font-size: 10px;
+    color: #0a347f;
+}
+
+.register-institution-info span {
+    font-size: 7px;
+    color: #70778b;
+}
+
+/* =========================
+   WELCOME
+   ========================= */
+
+.register-welcome-section {
+    margin-top: 26px;
+    margin-bottom: 17px;
+}
+
+.register-welcome-section h2 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 700;
+    color: #17213a;
+    letter-spacing: -0.5px;
+}
+
+.register-welcome-section p {
+    margin: 5px 0 0;
+    font-size: 10px;
+    color: #6c7282;
+}
+
+/* =========================
+   FORM GROUP
+   ========================= */
+
+.register-form-group {
+    margin-bottom: 13px;
+}
+
+.register-form-group>label {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+    color: #4e5361;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+}
+
+.register-form-group>label span {
+    color: #d33a3a;
+}
+
+/* =========================
+   INPUT
+   ========================= */
+
+.register-input-wrapper {
+    width: 100%;
+    height: 38px;
+    background: #f1f2fb;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    padding: 0 11px;
+}
+
+.register-input-icon {
+    font-size: 12px;
+    color: #777d91;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.register-input-wrapper input,
+.register-input-wrapper select {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #222b42;
+    font-size: 11px;
+    font-family: inherit;
+}
+
+.register-input-wrapper input::placeholder {
+    color: #8e93a2;
+    font-size: 10px;
+}
+
+.register-input-wrapper select {
+    cursor: pointer;
+}
+
+.register-input-wrapper select:invalid {
+    color: #8e93a2;
+}
+
+.register-eye-button {
+    border: none;
+    background: transparent;
+    color: #747a8d;
+    cursor: pointer;
+    padding: 0;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+
+/* =========================
+   TERMS
+   ========================= */
+
+.register-terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 4px 0 14px;
+}
+
+.register-terms input {
+    width: 13px;
+    height: 13px;
+    margin: 1px 0 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.register-terms label {
+    font-size: 8px;
+    line-height: 1.5;
+    color: #727787;
+    cursor: pointer;
+}
+
+.register-terms label span {
+    color: #0068c9;
+    font-weight: 600;
+}
+
+/* =========================
+   CREATE ACCOUNT BUTTON
+   ========================= */
+
+.register-create-button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 7px;
+    background: #062d7c;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(6, 45, 124, 0.22);
+    transition: 0.2s ease;
+}
+
+.register-create-button span {
+    margin-left: 6px;
+    font-size: 14px;
+}
+
+.register-create-button:hover {
+    background: #08245e;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   DIVIDER
+   ========================= */
+
+.register-divider {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 15px 0 9px;
+}
+
+.register-divider span {
+    flex: 1;
+    height: 1px;
+    background: #e8eaf2;
+}
+
+.register-divider small {
+    font-size: 7px;
+    color: #8b90a0;
+}
+
+/* =========================
+   SIGN IN
+   ========================= */
+
+.register-existing-user {
+    text-align: center;
+    margin: 0 0 6px;
+    color: #727787;
+    font-size: 8px;
+}
+
+.register-login-button {
+    width: 100%;
+    height: 37px;
+    border: none;
+    border-radius: 7px;
+    background: #e9ebfc;
+    color: #153579;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* =========================
+   PRIVACY
+   ========================= */
+
+.register-privacy-note {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 7px;
+    color: #646b7b;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.register-footer {
+    min-height: 30px;
+    background: #ffffff;
+    border-top: 1px solid #e8e9f1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    color: #737987;
+    font-size: 7px;
+}
+
+.register-footer div {
+    display: flex;
+    gap: 18px;
+}
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 800px) {
+
+    .register-main {
+        padding: 20px 15px;
+    }
+
+    .register-container {
+        grid-template-columns: 1fr;
+    }
+
+    .register-image-section {
+        position: relative;
+        top: auto;
+        height: 350px;
+    }
+
+    .register-form-section {
+        padding: 40px 25px;
+    }
+
+    .register-footer {
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .register-footer div {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 500px) {
+
+    .register-header {
+        padding: 0 15px;
+    }
+
+    .register-security-badge {
+        display: none;
+    }
+
+    .register-main {
+        padding: 15px 10px;
+    }
+
+    .register-image-section {
+        height: 320px;
+    }
+
+    .register-image-top-badges {
+        left: 15px;
+        right: 15px;
+    }
+
+    .register-image-top-badges span {
+        font-size: 7px;
+        padding: 4px 7px;
+    }
+
+    .register-image-content {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+    }
+
+    .register-image-content h1 {
+        font-size: 25px;
+    }
+
+    .register-form-section {
+        padding: 30px 20px;
+    }
+
+    .register-footer {
+        padding: 12px 10px;
+    }
+}
+
+/* =========================
+   SUCCESS MESSAGE
+   ========================= */
+
+.register-success-message {
+    margin-bottom: 14px;
+    padding: 10px 12px;
+    border: 1px solid #b7e4c7;
+    border-radius: 6px;
+    background: #f0fff4;
+    color: #218739;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.register-create-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ scholarship.title }} - Scholarship Details</title>
+</head>
+
+<body>
+
+    <h1>{{ scholarship.title }}</h1>
+
+    <hr>
+
+    <h2>Scholarship Information</h2>
+
+    <p>
+        <strong>Description:</strong>
+        {{ scholarship.description }}
+    </p>
+
+    <p>
+        <strong>Amount:</strong>
+        ₹{{ scholarship.amount }}
+    </p>
+
+    <p>
+        <strong>Application Start:</strong>
+        {{ scholarship.application_start }}
+    </p>
+
+    <p>
+        <strong>Application Deadline:</strong>
+        {{ scholarship.deadline }}
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+        {{ scholarship.status }}
+    </p>
+
+    <hr>
+
+    <h2>Eligibility Criteria 🎓</h2>
+
+    {% if eligibility %}
+
+        <p>
+            <strong>Eligible Courses:</strong>
+            {{ eligibility.eligible_courses }}
+        </p>
+
+        <p>
+            <strong>Specialization:</strong>
+            {{ eligibility.specialization }}
+        </p>
+
+        <p>
+            <strong>Minimum Percentage:</strong>
+            {{ eligibility.minimum_percentage }}%
+        </p>
+
+        <p>
+            <strong>Maximum Family Income:</strong>
+            ₹{{ eligibility.maximum_income }}
+        </p>
+
+        <p>
+            <strong>Category:</strong>
+            {{ eligibility.category }}
+        </p>
+
+        <p>
+            <strong>Gender:</strong>
+            {{ eligibility.gender }}
+        </p>
+
+        <p>
+            <strong>State:</strong>
+            {{ eligibility.state }}
+        </p>
+
+        <p>
+            <strong>Other Criteria:</strong>
+            {{ eligibility.other_criteria }}
+        </p>
+
+    {% else %}
+
+        <p>
+            Eligibility information is not available yet.
+        </p>
+
+    {% endif %}
+
+    <hr>
+
+    <h2>Required Documents 📄</h2>
+
+    {% if required_documents %}
+
+        <ul>
+
+            {% for document in required_documents %}
+
+                <li>
+
+                    <strong>
+                        {{ document.get_document_type_display }}
+                    </strong>
+
+                    {% if document.is_mandatory %}
+                        - Mandatory
+                    {% else %}
+                        - Optional
+                    {% endif %}
+
+                    {% if document.description %}
+                        <br>
+                        {{ document.description }}
+                    {% endif %}
+
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>
+            No required documents have been added yet.
+        </p>
+
+    {% endif %}
+
+    <hr>
+
+    <a href="{% url 'check_eligibility' scholarship.id %}">
+        <button type="button">
+            Check My Eligibility
+        </button>
+    </a>
+    
+    <br><br>
+
+    <a href="{% url 'apply_scholarship' scholarship.id %}">
+        <button type="button">
+            Apply Now
+        </button>
+    </a>
+
+    <br><br>
+
+    <a href="{% url 'scholarship_list' %}">
+        Back to Scholarships
+    </a>
+
+</body>
+
+</html>

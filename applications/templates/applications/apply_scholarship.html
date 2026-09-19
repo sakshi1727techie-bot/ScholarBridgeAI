@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apply for Scholarship</title>
+</head>
+
+<body>
+
+    <h1>Apply for Scholarship</h1>
+
+    <h2>{{ scholarship.title }}</h2>
+
+    <p>{{ scholarship.description }}</p>
+
+    <p>
+        <strong>Scholarship Amount:</strong>
+        ₹{{ scholarship.amount }}
+    </p>
+
+    <p>
+        <strong>Application Deadline:</strong>
+        {{ scholarship.deadline }}
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <button type="submit">
+            Confirm & Apply
+        </button>
+    </form>
+
+</body>
+</html>

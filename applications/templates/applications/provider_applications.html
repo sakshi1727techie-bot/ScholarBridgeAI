@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Provider Applications</title>
+</head>
+
+<body>
+
+    <h1>Student Applications 📋</h1>
+
+    <hr>
+
+    {% if applications %}
+
+        {% for application in applications %}
+
+            <div>
+                <h2>{{ application.scholarship.title }}</h2>
+
+                <p>
+                    <strong>Student Email:</strong>
+                    {{ application.student.email }}
+                </p>
+
+                <p>
+                    <strong>Applied On:</strong>
+                    {{ application.applied_at }}
+                </p>
+
+                <p>
+                    <strong>Current Status:</strong>
+                    {{ application.status }}
+                </p>
+
+                <form method="POST"
+                      action="{% url 'update_application_status' application.id %}">
+
+                    {% csrf_token %}
+
+                    <label>
+                        <strong>Change Status:</strong>
+                    </label>
+
+                    <select name="status">
+                        <option value="PENDING"
+                            {% if application.status == "PENDING" %}selected{% endif %}>
+                            Pending
+                        </option>
+
+                        <option value="UNDER_REVIEW"
+                            {% if application.status == "UNDER_REVIEW" %}selected{% endif %}>
+                            Under Review
+                        </option>
+
+                        <option value="APPROVED"
+                            {% if application.status == "APPROVED" %}selected{% endif %}>
+                            Approved
+                        </option>
+
+                        <option value="REJECTED"
+                            {% if application.status == "REJECTED" %}selected{% endif %}>
+                            Rejected
+                        </option>
+                    </select>
+
+                    <button type="submit">
+                        Update Status
+                    </button>
+
+                </form>
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No student applications found.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{% url 'provider_dashboard' %}">
+        Back to Provider Dashboard
+    </a>
+
+</body>
+</html>

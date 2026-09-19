@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Eligibility Check</title>
+</head>
+
+<body>
+
+    <h1>Eligibility Check 🎓</h1>
+
+    <hr>
+
+    <h2>{{ scholarship.title }}</h2>
+
+    {% if eligible %}
+
+        <h2>✅ You are Eligible!</h2>
+
+        <p>
+            Congratulations! Based on the available eligibility
+            criteria, you are eligible for this scholarship.
+        </p>
+
+        <br>
+
+        <a href="{% url 'check_eligibility' scholarship.id %}">
+            <button type="button">
+                Check My Eligibility
+            </button>
+        </a>
+        
+        <br><br>
+
+        <a href="{% url 'apply_scholarship' scholarship.id %}">
+            <button type="button">
+                Apply Now
+            </button>
+        </a>
+
+    {% else %}
+
+        <h2>❌ You are Not Eligible</h2>
+
+        <p>
+            You currently do not meet the eligibility requirements.
+        </p>
+
+        <h3>Reasons:</h3>
+
+        <ul>
+            {% for reason in reasons %}
+                <li>{{ reason }}</li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+    <hr>
+
+    <a href="{% url 'scholarship_detail' scholarship.id %}">
+        Back to Scholarship Details
+    </a>
+
+</body>
+
+</html>

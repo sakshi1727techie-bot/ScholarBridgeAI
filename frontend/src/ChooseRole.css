@@ -1,0 +1,651 @@
+/* ==================================================================
+   ChooseRole.css — styles for the "Choose Your Role" page.
+   All class names start with "cr-" so nothing clashes with your
+   existing App.css / index.css.
+   ================================================================== */
+
+.cr-page {
+    --blue: #2563eb;
+    --blue-dark: #1d4ed8;
+    --navy: #0f172a;
+    --slate: #475569;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --card: #ffffff;
+    --tint: #eef2ff;
+
+    min-height: 100vh;
+    background:
+        radial-gradient(900px 500px at 15% -5%, #e0e7ff 0%, transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, #dbeafe 0%, transparent 55%),
+        linear-gradient(180deg, #f6f8ff 0%, #ffffff 45%, #f7f9ff 100%);
+    color: var(--navy);
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.cr-page * {
+    box-sizing: border-box;
+}
+
+.cr-page a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ---------------- Navigation ---------------- */
+
+.cr-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+}
+
+.cr-nav-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.cr-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.cr-logo-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 15px;
+    background: linear-gradient(135deg, var(--blue) 0%, #7c3aed 100%);
+}
+
+.cr-logo-ai {
+    color: var(--blue);
+}
+
+.cr-nav-links {
+    display: flex;
+    gap: 26px;
+    font-size: 14px;
+    color: var(--slate);
+}
+
+.cr-nav-links a:hover {
+    color: var(--blue);
+}
+
+.cr-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.cr-link-btn {
+    font-size: 14px;
+    color: var(--slate);
+}
+
+.cr-link-btn:hover {
+    color: var(--blue);
+}
+
+/* ---------------- Shared button ---------------- */
+
+.cr-solid-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.cr-solid-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.32);
+}
+
+.cr-solid-btn:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 2px;
+}
+
+.cr-solid-btn--sm {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* ---------------- Layout ---------------- */
+
+.cr-main {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 46px 20px 70px;
+}
+
+/* ---------------- Intro ---------------- */
+
+.cr-intro {
+    text-align: center;
+    max-width: 660px;
+    margin: 0 auto 34px;
+}
+
+.cr-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    color: var(--blue);
+    background: var(--tint);
+    border: 1px solid #dbe3ff;
+    padding: 6px 14px;
+    border-radius: 999px;
+}
+
+.cr-title {
+    font-size: 46px;
+    line-height: 1.12;
+    font-weight: 700;
+    margin: 18px 0 12px;
+    letter-spacing: -0.02em;
+}
+
+.cr-title-accent {
+    color: var(--blue);
+}
+
+.cr-subtitle {
+    margin: 0 auto;
+    max-width: 520px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--slate);
+}
+
+.cr-note {
+    margin: 16px 0 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.cr-note svg {
+    color: var(--blue);
+    flex-shrink: 0;
+}
+
+/* ---------------- Hero banner ---------------- */
+
+.cr-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    padding: 118px 30px 26px;
+    color: #fff;
+    background:
+        linear-gradient(180deg, rgba(2, 6, 23, 0.1) 0%, rgba(2, 6, 23, 0.86) 72%),
+        linear-gradient(135deg, #0b1b3f 0%, #14306b 45%, #1e40af 100%);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.cr-hero-glow {
+    position: absolute;
+    inset: -40% 30% 45% -10%;
+    background: radial-gradient(closest-side,
+            rgba(96, 165, 250, 0.55),
+            transparent);
+    pointer-events: none;
+}
+
+.cr-hero-tag {
+    position: relative;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.cr-hero-title {
+    position: relative;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.35;
+    max-width: 560px;
+    margin: 12px 0 0;
+}
+
+.cr-hero-pills {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.cr-hero-pills span {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+/* ---------------- Role cards ---------------- */
+
+.cr-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 34px;
+}
+
+.cr-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.cr-card:hover {
+    transform: translateY(-5px);
+    border-color: #c7d2fe;
+    box-shadow: 0 16px 34px rgba(37, 99, 235, 0.16);
+}
+
+.cr-card-badge {
+    position: absolute;
+    top: -11px;
+    left: 18px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--navy);
+}
+
+/* ---------------- Real role images ---------------- */
+
+.cr-card-media {
+    position: relative;
+    height: 180px;
+    border-radius: 12px;
+    margin-top: 6px;
+    overflow: hidden;
+    background: #e2e8f0;
+}
+
+.cr-card-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.35s ease;
+}
+
+.cr-card:hover .cr-card-image {
+    transform: scale(1.04);
+}
+
+.cr-card-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(15, 23, 42, 0.02) 30%,
+            rgba(15, 23, 42, 0.45) 100%);
+    pointer-events: none;
+}
+
+.cr-card-media-label {
+    position: absolute;
+    z-index: 2;
+    right: 10px;
+    bottom: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+}
+
+.cr-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 16px 0 8px;
+}
+
+.cr-card-head h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.cr-card-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--blue-dark);
+    background: var(--tint);
+    padding: 5px 10px;
+    border-radius: 999px;
+    text-align: center;
+}
+
+.cr-card-text {
+    margin: 0 0 14px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--slate);
+}
+
+.cr-card-list {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.cr-card-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 13px;
+    color: var(--navy);
+}
+
+.cr-card-list svg {
+    color: var(--blue);
+    margin-top: 1px;
+    flex-shrink: 0;
+}
+
+.cr-card-btn {
+    width: 100%;
+    margin-top: auto;
+}
+
+.cr-card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin: 12px 0 0;
+    font-size: 11.5px;
+    color: var(--muted);
+}
+
+/* ---------------- Helper row ---------------- */
+
+.cr-helper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 34px;
+}
+
+.cr-helper-pill {
+    font-size: 13px;
+    color: var(--slate);
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 9px 16px;
+    border-radius: 999px;
+    transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.cr-helper-pill:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+}
+
+.cr-helper-text {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.cr-helper-text a {
+    color: var(--blue);
+    font-weight: 600;
+}
+
+/* ---------------- Stats ---------------- */
+
+.cr-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 46px;
+    padding: 26px 20px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+}
+
+.cr-stat {
+    text-align: center;
+}
+
+.cr-stat-value {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--blue);
+}
+
+.cr-stat-label {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* ---------------- Trust ---------------- */
+
+.cr-trust {
+    margin-top: 56px;
+    text-align: center;
+}
+
+.cr-trust-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 16px 0 10px;
+    letter-spacing: -0.01em;
+}
+
+.cr-trust-sub {
+    max-width: 560px;
+    margin: 0 auto 26px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--slate);
+}
+
+.cr-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    text-align: left;
+}
+
+.cr-trust-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.cr-trust-card:hover {
+    border-color: #c7d2fe;
+    transform: translateY(-3px);
+}
+
+.cr-trust-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    color: var(--blue);
+    background: var(--tint);
+    margin-bottom: 12px;
+}
+
+.cr-trust-card h4 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.cr-trust-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--muted);
+}
+
+/* ---------------- Footer ---------------- */
+
+.cr-footer {
+    border-top: 1px solid var(--line);
+    padding: 20px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--muted);
+    background: #fff;
+}
+
+.cr-footer p {
+    margin: 0;
+}
+
+/* ==================================================================
+   Responsive
+   ================================================================== */
+
+/* Tablet / small laptop */
+@media (max-width: 980px) {
+    .cr-nav-links {
+        display: none;
+    }
+
+    .cr-title {
+        font-size: 36px;
+    }
+
+    .cr-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cr-trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cr-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .cr-main {
+        padding: 30px 16px 54px;
+    }
+
+    .cr-title {
+        font-size: 30px;
+    }
+
+    .cr-subtitle {
+        font-size: 15px;
+    }
+
+    .cr-hero {
+        padding: 86px 20px 22px;
+        border-radius: 14px;
+    }
+
+    .cr-hero-title {
+        font-size: 19px;
+    }
+
+    .cr-cards,
+    .cr-trust-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cr-card-media {
+        height: 200px;
+    }
+
+    .cr-card-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .cr-trust-title {
+        font-size: 23px;
+    }
+
+    .cr-helper {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+    .cr-page * {
+        transition: none !important;
+    }
+}

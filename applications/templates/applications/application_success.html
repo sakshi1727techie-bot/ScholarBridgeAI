@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Submitted</title>
+</head>
+
+<body>
+
+    <h1>Application Submitted Successfully! 🎉</h1>
+
+    <h2>{{ scholarship.title }}</h2>
+
+    <p>
+        Your application has been submitted successfully.
+    </p>
+
+    <p>
+        <strong>Application Status:</strong>
+        {{ application.status }}
+    </p>
+
+    <p>
+        We will notify you when the application status is updated.
+    </p>
+
+    <a href="/application/{{ scholarship.id }}/apply/">
+        View Application
+    </a>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Applications</title>
+</head>
+
+<body>
+
+    <h1>My Scholarship Applications 📋</h1>
+
+    {% if applications %}
+
+        {% for application in applications %}
+
+            <div>
+
+                <h2>
+                    {{ application.scholarship.title }}
+                </h2>
+
+                <p>
+                    <strong>Amount:</strong>
+                    ₹{{ application.scholarship.amount }}
+                </p>
+
+                <p>
+                    <strong>Applied On:</strong>
+                    {{ application.applied_at }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ application.status }}
+                </p>
+
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>You have not applied for any scholarship yet.</p>
+
+    {% endif %}
+
+</body>
+
+</html>

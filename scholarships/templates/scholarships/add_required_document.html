@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Required Document</title>
+</head>
+
+<body>
+
+    <h1>Add Required Document 📄</h1>
+
+    <h2>{{ scholarship.title }}</h2>
+
+    <p>
+        Select the documents required from students for this scholarship.
+    </p>
+
+    <hr>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Save Required Document
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="{% url 'scholarship_detail' scholarship.id %}">
+        Back to Scholarship Details
+    </a>
+
+</body>
+
+</html>

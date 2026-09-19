@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Scholarship</title>
+</head>
+
+<body>
+
+    <h1>Create Scholarship</h1>
+    <p>Add a new scholarship opportunity.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Create Scholarship</button>
+    </form>
+
+</body>
+</html>

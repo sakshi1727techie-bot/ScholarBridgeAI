@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Scholarship Eligibility</title>
+</head>
+
+<body>
+
+    <h1>Add Eligibility</h1>
+
+    <h2>{{ scholarship.title }}</h2>
+
+    <p>Enter the eligibility criteria for this scholarship.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Save Eligibility
+        </button>
+    </form>
+
+</body>
+</html>

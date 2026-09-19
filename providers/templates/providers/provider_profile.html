@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Provider Profile</title>
+</head>
+
+<body>
+
+    <h1>Provider Profile</h1>
+
+    <p>Complete your organization details</p>
+
+    <form method="POST" action="{% url 'provider_profile' %}">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Save Profile
+        </button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Documents</title>
+</head>
+<body>
+
+<h1>My Documents</h1>
+
+<a href="{% url 'upload_document' %}">
+    Upload New Document
+</a>
+
+<hr>
+
+{% if documents %}
+
+    {% for doc in documents %}
+
+        <div>
+            <p>
+                <strong>Document:</strong>
+                {{ doc.get_document_type_display }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ doc.get_verification_status_display }}
+            </p>
+
+            <p>
+                <strong>Uploaded:</strong>
+                {{ doc.uploaded_at }}
+            </p>
+
+            <a href="{{ doc.document.url }}" target="_blank">
+                View Document
+            </a>
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>No documents uploaded yet.</p>
+
+{% endif %}
+
+</body>
+</html>

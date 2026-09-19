@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Provider Dashboard</title>
+</head>
+
+<body>
+
+    <h1>Provider Dashboard 🏢</h1>
+
+    <h2>Welcome, {{ provider.organization_name }}</h2>
+
+    <hr>
+
+    <h2>Scholarship Overview 🎓</h2>
+
+    <p>
+        <strong>Total Scholarships:</strong>
+        {{ total_scholarships }}
+    </p>
+
+    <p>
+        <strong>Approved Scholarships:</strong>
+        {{ approved_scholarships }}
+    </p>
+
+    <p>
+        <strong>Pending Scholarships:</strong>
+        {{ pending_scholarships }}
+    </p>
+
+    <p>
+        <strong>Rejected Scholarships:</strong>
+        {{ rejected_scholarships }}
+    </p>
+
+    <hr>
+
+    <h2>Application Overview 📋</h2>
+
+    <p>
+        <strong>Total Applications:</strong>
+        {{ total_applications }}
+    </p>
+
+    <p>
+        <strong>Pending Applications:</strong>
+        {{ pending_applications }}
+    </p>
+
+    <p>
+        <strong>Under Review:</strong>
+        {{ under_review_applications }}
+    </p>
+
+    <p>
+        <strong>Approved Applications:</strong>
+        {{ approved_applications }}
+    </p>
+
+    <hr>
+
+    <h2>My Scholarships 🎓</h2>
+
+    {% if scholarships %}
+
+        {% for scholarship in scholarships %}
+
+            <div>
+                <h3>{{ scholarship.title }}</h3>
+
+                <p>
+                    <strong>Amount:</strong>
+                    ₹{{ scholarship.amount }}
+                </p>
+
+                <p>
+                    <strong>Deadline:</strong>
+                    {{ scholarship.deadline }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ scholarship.status }}
+                </p>
+
+                <a href="{% url 'scholarship_detail' scholarship.id %}">
+                    View Scholarship
+                </a>
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>You have not created any scholarships yet.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{% url 'create_scholarship' %}">
+        <button type="button">Create New Scholarship</button>
+    </a>
+
+    <br><br>
+
+    <a href="{% url 'provider_applications' %}">
+        <button type="button">View Student Applications</button>
+    </a>
+
+    <br><br>
+
+    <a href="{% url 'provider_profile' %}">
+        Provider Profile
+    </a>
+
+</body>
+</html>
