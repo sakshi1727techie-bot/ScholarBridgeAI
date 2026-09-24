@@ -5,24 +5,24 @@ from django.db import models
 class Notification(models.Model):
 
     NOTIFICATION_TYPES = (
-        ("SCHOLARSHIP", "Scholarship"),
         ("APPLICATION", "Application"),
+        ("SCHOLARSHIP", "Scholarship"),
         ("DEADLINE", "Deadline"),
-        ("DOCUMENT", "Document"),
         ("SYSTEM", "System"),
+        ("OTHER", "Other"),
     )
 
-    recipient = models.ForeignKey(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="notifications"
     )
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=255)
 
     message = models.TextField()
 
-    notification_type = models.CharField(
+    type = models.CharField(
         max_length=20,
         choices=NOTIFICATION_TYPES,
         default="SYSTEM"
@@ -32,5 +32,8 @@ class Notification(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+
     def __str__(self):
-        return f"{self.recipient.email} - {self.title}"
+        return self.title

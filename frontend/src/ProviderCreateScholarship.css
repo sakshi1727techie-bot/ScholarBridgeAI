@@ -1,0 +1,480 @@
+.provider-create-scholarship-page {
+    min-height: 100vh;
+    padding: 32px;
+    background: #f6f8fc;
+    color: #172033;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.create-scholarship-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 28px;
+}
+
+.create-scholarship-header h1 {
+    margin: 12px 0 6px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #172033;
+}
+
+.create-scholarship-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.back-button {
+    border: none;
+    background: transparent;
+    color: #4f46e5;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+}
+
+.back-button:hover {
+    color: #3730a3;
+}
+
+/* =========================
+   APPROVAL INFO
+========================= */
+
+.approval-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #eef2ff;
+    border: 1px solid #dbe3ff;
+    border-radius: 12px;
+    padding: 14px 18px;
+    min-width: 280px;
+}
+
+.approval-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #4f46e5;
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+.approval-info strong {
+    display: block;
+    font-size: 13px;
+    color: #3730a3;
+}
+
+.approval-info small {
+    display: block;
+    margin-top: 3px;
+    color: #636b7a;
+    font-size: 11px;
+}
+
+/* =========================
+   MESSAGES
+========================= */
+
+.success-message,
+.error-message {
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.success-message {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #047857;
+}
+
+.error-message {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.create-scholarship-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.form-section {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+}
+
+/* =========================
+   SECTION HEADING
+========================= */
+
+.section-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 26px;
+}
+
+.section-number {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #4f46e5;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.section-heading h2 {
+    margin: 0 0 4px;
+    font-size: 19px;
+    color: #172033;
+}
+
+.section-heading p {
+    margin: 0;
+    color: #7a8495;
+    font-size: 13px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* =========================
+   FORM GROUP
+========================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-group label span {
+    color: #dc2626;
+    margin-left: 3px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d8dee9;
+    border-radius: 9px;
+    padding: 12px 13px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #1f2937;
+    background: #ffffff;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #a0a7b4;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.10);
+}
+
+/* =========================
+   INPUT SYMBOL
+========================= */
+
+.input-with-symbol {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d8dee9;
+    border-radius: 9px;
+    background: white;
+    overflow: hidden;
+    transition: 0.2s ease;
+}
+
+.input-with-symbol:focus-within {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.10);
+}
+
+.input-with-symbol span {
+    padding-left: 13px;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.input-with-symbol input {
+    border: none;
+    box-shadow: none;
+}
+
+.input-with-symbol input:focus {
+    box-shadow: none;
+}
+
+/* =========================
+   DOCUMENTS
+========================= */
+
+.documents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.document-row {
+    display: grid;
+    grid-template-columns: 38px 1fr 1fr 130px 36px;
+    align-items: end;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fafbff;
+}
+
+.document-number {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2ff;
+    color: #4f46e5;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 1px;
+}
+
+.mandatory-box {
+    height: 43px;
+    display: flex;
+    align-items: center;
+}
+
+.mandatory-box label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4b5563;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.mandatory-box input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.remove-document {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 8px;
+    background: #fee2e2;
+    color: #dc2626;
+    font-size: 21px;
+    line-height: 1;
+    cursor: pointer;
+    margin-bottom: 4px;
+}
+
+.remove-document:hover {
+    background: #fecaca;
+}
+
+.remove-document:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.add-document-button {
+    margin-top: 18px;
+    border: 1px dashed #818cf8;
+    background: #f5f7ff;
+    color: #4f46e5;
+    border-radius: 9px;
+    padding: 11px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add-document-button:hover {
+    background: #eef2ff;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 20px;
+}
+
+.cancel-button,
+.submit-button {
+    border-radius: 9px;
+    padding: 12px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.cancel-button {
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #4b5563;
+}
+
+.cancel-button:hover {
+    background: #f9fafb;
+}
+
+.submit-button {
+    border: none;
+    background: #4f46e5;
+    color: white;
+    min-width: 180px;
+}
+
+.submit-button:hover {
+    background: #4338ca;
+}
+
+.cancel-button:disabled,
+.submit-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .create-scholarship-header {
+        flex-direction: column;
+    }
+
+    .approval-info {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .document-row {
+        grid-template-columns: 36px 1fr 1fr;
+    }
+
+    .mandatory-box {
+        height: auto;
+    }
+
+    .remove-document {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .provider-create-scholarship-page {
+        padding: 18px;
+    }
+
+    .create-scholarship-header h1 {
+        font-size: 25px;
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .document-row {
+        grid-template-columns: 1fr;
+    }
+
+    .document-number {
+        margin-bottom: 0;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .cancel-button,
+    .submit-button {
+        width: 100%;
+    }
+}

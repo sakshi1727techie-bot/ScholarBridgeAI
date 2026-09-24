@@ -3,10 +3,15 @@
 ================================ */
 
 .scholarship-details-page {
+
     min-height: 100vh;
+
     background: #f8fafc;
+
     padding: 32px 5%;
+
     color: #0f172a;
+
 }
 
 
@@ -15,59 +20,105 @@
 ================================ */
 
 .details-header {
+
     max-width: 1200px;
+
     margin: 0 auto 30px;
+
 }
 
 .details-back-btn {
+
     border: none;
+
     background: transparent;
+
     color: #2563eb;
+
     font-size: 15px;
+
     font-weight: 600;
+
     cursor: pointer;
+
     padding: 8px 0;
+
     transition: 0.2s ease;
+
 }
 
 .details-back-btn:hover {
+
     color: #1d4ed8;
+
     transform: translateX(-3px);
+
 }
 
 .details-heading {
+
     margin-top: 20px;
+
 }
 
 .details-label {
+
     display: inline-block;
+
     margin-bottom: 10px;
+
     color: #2563eb;
+
     font-size: 13px;
+
     font-weight: 700;
+
     letter-spacing: 1.5px;
+
 }
 
 .details-heading h1 {
+
     margin: 0;
+
     font-size: 38px;
+
     font-weight: 800;
+
     line-height: 1.2;
-    background: linear-gradient(90deg,
-            #2563eb 0%,
-            #4f46e5 50%,
-            #7c3aed 100%);
+
+    background: linear-gradient(
+
+        90deg,
+
+        #2563eb 0%,
+
+        #4f46e5 50%,
+
+        #7c3aed 100%
+
+    );
+
     -webkit-background-clip: text;
+
     -webkit-text-fill-color: transparent;
+
     background-clip: text;
+
 }
 
 .details-heading p {
+
     margin: 12px 0 0;
+
     max-width: 720px;
+
     color: #64748b;
+
     font-size: 16px;
+
     line-height: 1.6;
+
 }
 
 
@@ -76,8 +127,11 @@
 ================================ */
 
 .details-container {
+
     max-width: 1200px;
+
     margin: 0 auto;
+
 }
 
 
@@ -86,44 +140,75 @@
 ================================ */
 
 .details-card {
+
     background: #ffffff;
+
     border: 1px solid #e2e8f0;
+
     border-radius: 18px;
+
     padding: 28px;
+
     margin-bottom: 24px;
+
     box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+
 }
 
 .details-card-heading {
+
     display: flex;
+
     align-items: center;
+
     gap: 15px;
+
     margin-bottom: 24px;
+
 }
 
 .details-section-icon {
+
     width: 48px;
+
     height: 48px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     border-radius: 12px;
+
     background: #eff6ff;
+
     font-size: 23px;
+
     flex-shrink: 0;
+
 }
 
 .details-card-heading h2 {
+
     margin: 0;
+
     color: #0f172a;
+
     font-size: 21px;
+
     font-weight: 750;
+
 }
 
 .details-card-heading p {
+
     margin: 5px 0 0;
+
     color: #64748b;
+
     font-size: 14px;
+
 }
 
 
@@ -132,63 +217,119 @@
 ================================ */
 
 .overview-description {
+
     padding: 18px 20px;
+
     margin-bottom: 24px;
+
     border-radius: 12px;
+
     background: #f8fafc;
+
     border: 1px solid #e2e8f0;
+
     color: #475569;
+
     font-size: 15px;
+
     line-height: 1.7;
+
 }
 
 .overview-grid {
+
     display: grid;
+
     grid-template-columns: repeat(2, 1fr);
+
     gap: 16px;
+
 }
 
 .overview-item {
+
     display: flex;
+
     align-items: center;
+
     gap: 14px;
+
     padding: 17px;
+
     border: 1px solid #e2e8f0;
+
     border-radius: 13px;
+
     background: #ffffff;
+
+    transition: 0.25s ease;
+
+}
+
+.overview-item:hover {
+
+    border-color: #bfdbfe;
+
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.08);
+
+    transform: translateY(-2px);
+
 }
 
 .overview-icon {
+
     width: 42px;
+
     height: 42px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     background: #f1f5f9;
+
     border-radius: 10px;
+
     font-size: 20px;
+
     flex-shrink: 0;
+
 }
 
-.overview-item>div {
+.overview-item > div {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 4px;
+
 }
 
 .overview-label {
+
     color: #64748b;
+
     font-size: 12px;
+
     font-weight: 600;
+
 }
 
 .overview-item strong {
+
     color: #0f172a;
+
     font-size: 15px;
+
 }
 
 .deadline-text {
+
     color: #dc2626 !important;
+
 }
 
 
@@ -197,35 +338,69 @@
 ================================ */
 
 .eligibility-grid {
+
     display: grid;
+
     grid-template-columns: repeat(2, 1fr);
+
     gap: 16px;
+
 }
 
 .eligibility-item {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 7px;
+
     padding: 17px;
+
     border: 1px solid #e2e8f0;
+
     border-radius: 13px;
+
     background: #f8fafc;
+
+    transition: 0.25s ease;
+
+}
+
+.eligibility-item:hover {
+
+    border-color: #c7d2fe;
+
+    background: #ffffff;
+
+    transform: translateY(-2px);
+
 }
 
 .eligibility-item span {
+
     color: #64748b;
+
     font-size: 12px;
+
     font-weight: 600;
+
 }
 
 .eligibility-item strong {
+
     color: #0f172a;
+
     font-size: 15px;
+
     line-height: 1.5;
+
 }
 
 .eligibility-item.full-width {
+
     grid-column: 1 / -1;
+
 }
 
 
@@ -234,96 +409,677 @@
 ================================ */
 
 .documents-list {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 12px;
+
 }
 
 .document-item {
+
     display: flex;
+
     align-items: center;
+
     gap: 15px;
+
     padding: 17px;
+
     border: 1px solid #e2e8f0;
+
     border-radius: 13px;
+
     background: #ffffff;
+
+    transition: 0.25s ease;
+
+}
+
+.document-item:hover {
+
+    border-color: #bfdbfe;
+
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.07);
+
+    transform: translateY(-2px);
+
 }
 
 .document-icon {
+
     width: 43px;
+
     height: 43px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     border-radius: 10px;
+
     background: #eff6ff;
+
     font-size: 19px;
+
     flex-shrink: 0;
+
 }
 
 .document-content {
+
     flex: 1;
+
 }
 
 .document-content h3 {
+
     margin: 0 0 4px;
+
     color: #0f172a;
+
     font-size: 15px;
+
     font-weight: 700;
+
 }
 
 .document-content p {
+
     margin: 0;
+
     color: #64748b;
+
     font-size: 13px;
+
     line-height: 1.5;
+
 }
 
 .mandatory-badge,
+
 .optional-badge {
+
     padding: 6px 10px;
+
     border-radius: 20px;
+
     font-size: 11px;
+
     font-weight: 700;
+
     white-space: nowrap;
+
 }
 
 .mandatory-badge {
+
     background: #fef2f2;
+
     color: #dc2626;
+
 }
 
 .optional-badge {
+
     background: #f0fdf4;
+
     color: #16a34a;
+
 }
 
 
 /* ================================
-   Bottom Action
+   APPLY SCHOLARSHIP SECTION
 ================================ */
 
-.details-bottom-actions {
+.details-apply-section {
+
+    position: relative;
+
     display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin: 32px 0 28px;
+
+    padding: 34px;
+
+    border-radius: 22px;
+
+    background:
+
+        radial-gradient(
+
+            circle at top right,
+
+            rgba(99, 102, 241, 0.16),
+
+            transparent 38%
+
+        ),
+
+        radial-gradient(
+
+            circle at bottom left,
+
+            rgba(37, 99, 235, 0.12),
+
+            transparent 40%
+
+        ),
+
+        #ffffff;
+
+    border: 1px solid #dbeafe;
+
+    box-shadow:
+
+        0 14px 40px rgba(37, 99, 235, 0.09),
+
+        0 2px 8px rgba(15, 23, 42, 0.04);
+
+    overflow: hidden;
+
+}
+
+
+/* Decorative top line */
+
+.details-apply-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 4px;
+
+    background: linear-gradient(
+
+        90deg,
+
+        #2563eb,
+
+        #4f46e5,
+
+        #7c3aed
+
+    );
+
+}
+
+
+/* Apply content */
+
+.apply-content {
+
+    display: flex;
+
+    align-items: center;
+
     justify-content: center;
-    padding: 5px 0 25px;
+
+    gap: 16px;
+
+    text-align: left;
+
 }
 
-.details-bottom-back {
-    border: none;
-    border-radius: 10px;
-    padding: 12px 22px;
-    background: #2563eb;
-    color: #ffffff;
+.apply-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+
+        135deg,
+
+        #eff6ff,
+
+        #eef2ff
+
+    );
+
+    border: 1px solid #dbeafe;
+
+    font-size: 27px;
+
+    box-shadow:
+
+        0 5px 15px rgba(37, 99, 235, 0.10);
+
+}
+
+.apply-text h2 {
+
+    margin: 0 0 5px;
+
+    color: #0f172a;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+}
+
+.apply-text p {
+
+    margin: 0;
+
+    color: #64748b;
+
     font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.2s ease;
+
+    line-height: 1.5;
+
 }
 
-.details-bottom-back:hover {
-    background: #1d4ed8;
+
+/* ================================
+   Apply Now Button
+================================ */
+
+.details-apply-btn {
+
+    min-width: 230px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 14px 28px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+
+        135deg,
+
+        #2563eb,
+
+        #4f46e5
+
+    );
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 750;
+
+    letter-spacing: 0.1px;
+
+    cursor: pointer;
+
+    box-shadow:
+
+        0 8px 20px rgba(37, 99, 235, 0.25);
+
+    transition:
+
+        transform 0.25s ease,
+
+        box-shadow 0.25s ease,
+
+        background 0.25s ease;
+
+}
+
+.details-apply-btn:hover:not(:disabled) {
+
+    transform: translateY(-3px);
+
+    background: linear-gradient(
+
+        135deg,
+
+        #1d4ed8,
+
+        #4338ca
+
+    );
+
+    box-shadow:
+
+        0 12px 28px rgba(37, 99, 235, 0.32);
+
+}
+
+.details-apply-btn:active:not(:disabled) {
+
     transform: translateY(-1px);
+
+}
+
+.details-apply-btn:disabled {
+
+    cursor: not-allowed;
+
+}
+
+
+/* Arrow */
+
+.apply-arrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 25px;
+
+    height: 25px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    font-size: 17px;
+
+    transition: transform 0.25s ease;
+
+}
+
+.details-apply-btn:hover:not(:disabled) .apply-arrow {
+
+    transform: translateX(4px);
+
+}
+
+
+/* ================================
+   Application Loading
+================================ */
+
+.apply-spinner {
+
+    width: 17px;
+
+    height: 17px;
+
+    border: 2px solid rgba(255, 255, 255, 0.35);
+
+    border-top-color: #ffffff;
+
+    border-radius: 50%;
+
+    animation: applySpin 0.7s linear infinite;
+
+}
+
+@keyframes applySpin {
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+
+/* ================================
+   Application Submitted Button
+================================ */
+
+.application-submitted-btn {
+
+    background: linear-gradient(
+
+        135deg,
+
+        #059669,
+
+        #10b981
+
+    ) !important;
+
+    box-shadow:
+
+        0 8px 20px rgba(16, 185, 129, 0.22) !important;
+
+    cursor: default !important;
+
+}
+
+.application-submitted-btn:hover {
+
+    transform: none !important;
+
+}
+
+.apply-check-icon {
+
+    width: 25px;
+
+    height: 25px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.2);
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+}
+
+
+/* ================================
+   Application Success Card
+================================ */
+
+.application-success-card,
+
+.application-error-card {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    padding: 18px 20px;
+
+    border-radius: 14px;
+
+    animation: applicationMessageIn 0.35s ease;
+
+}
+
+.application-success-card {
+
+    background: #f0fdf4;
+
+    border: 1px solid #bbf7d0;
+
+}
+
+.application-error-card {
+
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+}
+
+@keyframes applicationMessageIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(8px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ================================
+   Application Status Icon
+================================ */
+
+.application-status-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+}
+
+.success-icon {
+
+    background: #dcfce7;
+
+    color: #16a34a;
+
+}
+
+.error-icon {
+
+    background: #fee2e2;
+
+    color: #dc2626;
+
+}
+
+
+/* ================================
+   Application Status Content
+================================ */
+
+.application-status-content {
+
+    flex: 1;
+
+}
+
+.application-status-content h3 {
+
+    margin: 1px 0 5px;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+}
+
+.application-success-card h3 {
+
+    color: #166534;
+
+}
+
+.application-error-card h3 {
+
+    color: #991b1b;
+
+}
+
+.application-status-content p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+.application-success-card p {
+
+    color: #166534;
+
+}
+
+.application-error-card p {
+
+    color: #991b1b;
+
+}
+
+.application-next-step {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: #15803d;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+.application-next-step strong {
+
+    font-weight: 800;
+
 }
 
 
@@ -332,28 +1088,47 @@
 ================================ */
 
 .details-loading {
+
     min-height: 70vh;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
+
     color: #64748b;
+
 }
 
 .details-spinner {
+
     width: 42px;
+
     height: 42px;
+
     border: 4px solid #dbeafe;
+
     border-top-color: #2563eb;
+
     border-radius: 50%;
+
     animation: detailsSpin 0.8s linear infinite;
+
     margin-bottom: 15px;
+
 }
 
 @keyframes detailsSpin {
+
     to {
+
         transform: rotate(360deg);
+
     }
+
 }
 
 
@@ -362,23 +1137,37 @@
 ================================ */
 
 .details-error {
+
     min-height: 70vh;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
+
     text-align: center;
+
     color: #64748b;
+
 }
 
-.details-error>span {
+.details-error > span {
+
     font-size: 40px;
+
     margin-bottom: 10px;
+
 }
 
 .details-error p {
+
     margin: 0 0 18px;
+
     font-size: 15px;
+
 }
 
 
@@ -387,12 +1176,19 @@
 ================================ */
 
 .no-details {
+
     padding: 20px;
+
     text-align: center;
+
     border-radius: 12px;
+
     background: #f8fafc;
+
     color: #64748b;
+
     font-size: 14px;
+
 }
 
 
@@ -403,76 +1199,230 @@
 @media (max-width: 768px) {
 
     .scholarship-details-page {
+
         padding: 24px 16px;
+
     }
 
     .details-heading h1 {
+
         font-size: 30px;
+
     }
 
     .details-card {
+
         padding: 20px;
+
         border-radius: 15px;
+
     }
 
     .overview-grid,
+
     .eligibility-grid {
+
         grid-template-columns: 1fr;
+
     }
 
     .eligibility-item.full-width {
+
         grid-column: auto;
+
     }
 
     .document-item {
+
         align-items: flex-start;
+
     }
 
     .mandatory-badge,
+
     .optional-badge {
+
         margin-left: auto;
+
     }
+
+    /* Apply section */
+
+    .details-apply-section {
+
+        padding: 28px 20px;
+
+    }
+
+    .apply-content {
+
+        width: 100%;
+
+        justify-content: flex-start;
+
+    }
+
+    .details-apply-btn {
+
+        width: 100%;
+
+        max-width: 360px;
+
+    }
+
+    .application-success-card,
+
+    .application-error-card {
+
+        width: 100%;
+
+    }
+
 }
 
 
 @media (max-width: 480px) {
 
     .details-heading h1 {
+
         font-size: 26px;
+
     }
 
     .details-heading p {
+
         font-size: 14px;
+
     }
 
     .details-card-heading {
+
         align-items: flex-start;
+
     }
 
     .details-section-icon {
+
         width: 42px;
+
         height: 42px;
+
     }
 
     .details-card-heading h2 {
+
         font-size: 18px;
+
     }
 
     .overview-item {
+
         padding: 14px;
+
     }
 
     .document-item {
+
         flex-wrap: wrap;
+
     }
 
     .document-content {
+
         min-width: 0;
+
         width: calc(100% - 60px);
+
     }
 
     .mandatory-badge,
+
     .optional-badge {
+
         margin-left: 58px;
+
     }
+
+    /* Apply section */
+
+    .details-apply-section {
+
+        padding: 25px 16px;
+
+        border-radius: 18px;
+
+    }
+
+    .apply-content {
+
+        align-items: flex-start;
+
+    }
+
+    .apply-icon {
+
+        width: 48px;
+
+        height: 48px;
+
+        font-size: 23px;
+
+        border-radius: 13px;
+
+    }
+
+    .apply-text h2 {
+
+        font-size: 18px;
+
+    }
+
+    .apply-text p {
+
+        font-size: 13px;
+
+    }
+
+    .details-apply-btn {
+
+        max-width: none;
+
+        font-size: 14px;
+
+        padding: 13px 20px;
+
+    }
+
+    .application-success-card,
+
+    .application-error-card {
+
+        padding: 15px;
+
+        gap: 11px;
+
+    }
+
+    .application-status-icon {
+
+        width: 34px;
+
+        height: 34px;
+
+        font-size: 17px;
+
+    }
+
+    .application-status-content h3 {
+
+        font-size: 14px;
+
+    }
+
+    .application-status-content p {
+
+        font-size: 12px;
+
+    }
+
 }

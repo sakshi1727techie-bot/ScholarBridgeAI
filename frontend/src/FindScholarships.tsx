@@ -11,6 +11,16 @@ interface Scholarship {
     status: string;
 }
 
+interface SavedScholarship {
+    id: number;
+    scholarship: number;
+    scholarship_title?: string;
+    scholarship_amount?: string;
+    provider_name?: string;
+    deadline?: string;
+    saved_at?: string;
+}
+
 interface FindScholarshipsProps {
     onBack?: () => void;
     onViewDetails?: (scholarshipId: number) => void;
@@ -26,6 +36,20 @@ const FindScholarships: React.FC<FindScholarshipsProps> = ({
 
     const [searchTerm, setSearchTerm] = useState("");
 
+    // =========================
+    // SAVED SCHOLARSHIPS
+    // =========================
+    const [savedScholarshipIds, setSavedScholarshipIds] = useState<
+        Set<number>
+    >(new Set());
+
+    const [savingScholarshipId, setSavingScholarshipId] = useState<
+        number | null
+    >(null);
+
+    // =========================
+    // FETCH SCHOLARSHIPS
+    // =========================
     useEffect(() => {
         const fetchScholarships = async () => {
             try {
@@ -60,15 +84,176 @@ const FindScholarships: React.FC<FindScholarshipsProps> = ({
         fetchScholarships();
     }, []);
 
-    const filteredScholarships = scholarships.filter(
-        (scholarship) =>
-            scholarship.title
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase()) ||
-            scholarship.description
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase())
-    );
+    // =========================
+    // FETCH SAVED SCHOLARSHIPS
+    // =========================
+    useEffect(() => {
+        const fetchSavedScholarships = async () => {
+            try {
+                const token =
+                    localStorage.getItem(
+                        "scholarbridge_token"
+                    );
+
+                if (!token) {
+                    return;
+                }
+
+                const response = await fetch(
+                    "http://127.0.0.1:8000/api/scholarships/saved/",
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Token ${token}`,
+                        },
+                    }
+                );
+
+                if (!response.ok) {
+                    console.error(
+                        "Failed to fetch saved scholarships"
+                    );
+                    return;
+                }
+
+                const data = await response.json();
+
+                /*
+                 * Backend may return either:
+                 * 1. Array
+                 * 2. { saved_scholarships: [...] }
+                 * 3. { scholarships: [...] }
+                 */
+
+                const savedList: SavedScholarship[] =
+                    Array.isArray(data)
+                        ? data
+                        : data.saved_scholarships ||
+                          data.scholarships ||
+                          [];
+
+                const ids = new Set<number>();
+
+                savedList.forEach((item) => {
+                    if (item.scholarship) {
+                        ids.add(Number(item.scholarship));
+                    }
+                });
+
+                setSavedScholarshipIds(ids);
+            } catch (error) {
+                console.error(
+                    "Saved scholarships fetch error:",
+                    error
+                );
+            }
+        };
+
+        fetchSavedScholarships();
+    }, []);
+
+    // =========================
+    // SAVE / UNSAVE SCHOLARSHIP
+    // =========================
+    const handleSaveScholarship = async (
+        scholarshipId: number
+    ) => {
+        try {
+            const token =
+                localStorage.getItem(
+                    "scholarbridge_token"
+                );
+
+            if (!token) {
+                alert(
+                    "Please login to save scholarships."
+                );
+                return;
+            }
+
+            setSavingScholarshipId(scholarshipId);
+
+            const isSaved =
+                savedScholarshipIds.has(
+                    scholarshipId
+                );
+
+            const response = await fetch(
+                `http://127.0.0.1:8000/api/scholarships/${scholarshipId}/${
+                    isSaved ? "unsave" : "save"
+                }/`,
+                {
+                    method: isSaved
+                        ? "DELETE"
+                        : "POST",
+
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        "Content-Type":
+                            "application/json",
+                    },
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message ||
+                        "Unable to update saved scholarship."
+                );
+            }
+
+            setSavedScholarshipIds(
+                (previousIds) => {
+                    const updatedIds = new Set(
+                        previousIds
+                    );
+
+                    if (isSaved) {
+                        updatedIds.delete(
+                            scholarshipId
+                        );
+                    } else {
+                        updatedIds.add(
+                            scholarshipId
+                        );
+                    }
+
+                    return updatedIds;
+                }
+            );
+        } catch (error) {
+            console.error(
+                "Save scholarship error:",
+                error
+            );
+
+            alert(
+                "Unable to update saved scholarship. Please try again."
+            );
+        } finally {
+            setSavingScholarshipId(null);
+        }
+    };
+
+    // =========================
+    // SEARCH
+    // =========================
+    const filteredScholarships =
+        scholarships.filter(
+            (scholarship) =>
+                scholarship.title
+                    .toLowerCase()
+                    .includes(
+                        searchTerm.toLowerCase()
+                    ) ||
+                scholarship.description
+                    .toLowerCase()
+                    .includes(
+                        searchTerm.toLowerCase()
+                    )
+        );
 
     return (
         <div className="find-scholarships-page">
@@ -131,7 +316,9 @@ const FindScholarships: React.FC<FindScholarshipsProps> = ({
                         placeholder="Search scholarships..."
                         value={searchTerm}
                         onChange={(event) =>
-                            setSearchTerm(event.target.value)
+                            setSearchTerm(
+                                event.target.value
+                            )
                         }
                     />
 
@@ -237,128 +424,202 @@ const FindScholarships: React.FC<FindScholarshipsProps> = ({
                     <div className="scholarship-grid">
 
                         {filteredScholarships.map(
-                            (scholarship) => (
-                                <div
-                                    className="scholarship-card"
-                                    key={scholarship.id}
-                                >
+                            (scholarship) => {
 
-                                    {/* Card Top */}
-                                    <div className="scholarship-card-top">
+                                const isSaved =
+                                    savedScholarshipIds.has(
+                                        scholarship.id
+                                    );
 
-                                        <div className="scholarship-card-icon">
-                                            🎓
-                                        </div>
+                                const isSaving =
+                                    savingScholarshipId ===
+                                    scholarship.id;
 
-                                        <span className="scholarship-status">
-                                            {scholarship.status}
-                                        </span>
-
-                                    </div>
-
-
-                                    {/* Title */}
-                                    <h2 className="scholarship-card-title">
-                                        {scholarship.title}
-                                    </h2>
-
-
-                                    {/* Description */}
-                                    <p className="scholarship-description">
-                                        {scholarship.description}
-                                    </p>
-
-
-                                    {/* Information */}
-                                    <div className="scholarship-info">
-
-                                        <div className="scholarship-info-item">
-
-                                            <div className="info-left">
-                                                <span className="info-icon">
-                                                    💰
-                                                </span>
-
-                                                <span className="scholarship-info-label">
-                                                    Amount
-                                                </span>
-                                            </div>
-
-                                            <span className="scholarship-info-value">
-                                                ₹
-                                                {Number(
-                                                    scholarship.amount
-                                                ).toLocaleString(
-                                                    "en-IN"
-                                                )}
-                                            </span>
-
-                                        </div>
-
-
-                                        <div className="scholarship-info-item">
-
-                                            <div className="info-left">
-                                                <span className="info-icon">
-                                                    📅
-                                                </span>
-
-                                                <span className="scholarship-info-label">
-                                                    Application Start
-                                                </span>
-                                            </div>
-
-                                            <span className="scholarship-info-value">
-                                                {
-                                                    scholarship.application_start
-                                                }
-                                            </span>
-
-                                        </div>
-
-
-                                        <div className="scholarship-info-item">
-
-                                            <div className="info-left">
-                                                <span className="info-icon">
-                                                    ⏰
-                                                </span>
-
-                                                <span className="scholarship-info-label">
-                                                    Deadline
-                                                </span>
-                                            </div>
-
-                                            <span className="scholarship-info-value deadline-value">
-                                                {
-                                                    scholarship.deadline
-                                                }
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    {/* View Details */}
-                                    <button
-                                        type="button"
-                                        className="view-details-btn"
-                                        onClick={() =>
-                                            onViewDetails?.(
-                                                scholarship.id
-                                            )
+                                return (
+                                    <div
+                                        className="scholarship-card"
+                                        key={
+                                            scholarship.id
                                         }
                                     >
-                                        View Details
 
-                                        <span>
-                                            →
-                                        </span>
-                                    </button>
+                                        {/* Card Top */}
 
-                                </div>
-                            )
+                                        <div className="scholarship-card-top">
+
+                                            <div className="scholarship-card-icon">
+                                                🎓
+                                            </div>
+
+                                            <span className="scholarship-status">
+                                                {
+                                                    scholarship.status
+                                                }
+                                            </span>
+
+                                        </div>
+
+
+                                        {/* Title */}
+
+                                        <h2 className="scholarship-card-title">
+                                            {
+                                                scholarship.title
+                                            }
+                                        </h2>
+
+
+                                        {/* Description */}
+
+                                        <p className="scholarship-description">
+                                            {
+                                                scholarship.description
+                                            }
+                                        </p>
+
+
+                                        {/* Information */}
+
+                                        <div className="scholarship-info">
+
+                                            <div className="scholarship-info-item">
+
+                                                <div className="info-left">
+
+                                                    <span className="info-icon">
+                                                        💰
+                                                    </span>
+
+                                                    <span className="scholarship-info-label">
+                                                        Amount
+                                                    </span>
+
+                                                </div>
+
+                                                <span className="scholarship-info-value">
+                                                    ₹
+                                                    {Number(
+                                                        scholarship.amount
+                                                    ).toLocaleString(
+                                                        "en-IN"
+                                                    )}
+                                                </span>
+
+                                            </div>
+
+
+                                            <div className="scholarship-info-item">
+
+                                                <div className="info-left">
+
+                                                    <span className="info-icon">
+                                                        📅
+                                                    </span>
+
+                                                    <span className="scholarship-info-label">
+                                                        Application Start
+                                                    </span>
+
+                                                </div>
+
+                                                <span className="scholarship-info-value">
+                                                    {
+                                                        scholarship.application_start
+                                                    }
+                                                </span>
+
+                                            </div>
+
+
+                                            <div className="scholarship-info-item">
+
+                                                <div className="info-left">
+
+                                                    <span className="info-icon">
+                                                        ⏰
+                                                    </span>
+
+                                                    <span className="scholarship-info-label">
+                                                        Deadline
+                                                    </span>
+
+                                                </div>
+
+                                                <span className="scholarship-info-value deadline-value">
+                                                    {
+                                                        scholarship.deadline
+                                                    }
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        {/* =========================
+                                            SAVE SCHOLARSHIP BUTTON
+                                        ========================= */}
+
+                                        <button
+                                            type="button"
+                                            className={`save-scholarship-btn ${
+                                                isSaved
+                                                    ? "saved"
+                                                    : ""
+                                            }`}
+                                            onClick={() =>
+                                                handleSaveScholarship(
+                                                    scholarship.id
+                                                )
+                                            }
+                                            disabled={
+                                                isSaving
+                                            }
+                                        >
+                                            {isSaving ? (
+                                                <>
+                                                    <span className="save-spinner"></span>
+                                                    Updating...
+                                                </>
+                                            ) : isSaved ? (
+                                                <>
+                                                    <span>
+                                                        ✓
+                                                    </span>
+                                                    Saved
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <span>
+                                                        🔖
+                                                    </span>
+                                                    Save Scholarship
+                                                </>
+                                            )}
+                                        </button>
+
+
+                                        {/* View Details */}
+
+                                        <button
+                                            type="button"
+                                            className="view-details-btn"
+                                            onClick={() =>
+                                                onViewDetails?.(
+                                                    scholarship.id
+                                                )
+                                            }
+                                        >
+                                            View Details
+
+                                            <span>
+                                                →
+                                            </span>
+                                        </button>
+
+                                    </div>
+                                );
+                            }
                         )}
 
                     </div>

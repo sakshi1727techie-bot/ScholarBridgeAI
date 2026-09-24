@@ -243,7 +243,8 @@ def student_profile_api(request):
     ]
 
     completed_fields = sum(
-        1 for field in fields
+        1
+        for field in fields
         if field not in [None, ""]
     )
 
@@ -273,6 +274,95 @@ def student_profile_api(request):
                 "family_income": profile.family_income,
                 "category": profile.category,
             }
+        },
+        status=200
+    )
+
+
+# ==========================================
+# ADMIN - STUDENT LIST API
+# ==========================================
+
+@api_view(["GET"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def admin_student_list_api(request):
+
+    # ==========================================
+    # CHECK ADMIN ROLE
+    # ==========================================
+
+    if getattr(request.user, "role", None) != "ADMIN":
+        return Response(
+            {
+                "message": "Only admin users can access student records."
+            },
+            status=403
+        )
+
+    # ==========================================
+    # GET ALL STUDENT PROFILES
+    # ==========================================
+
+    profiles = StudentProfile.objects.select_related(
+        "user"
+    ).all().order_by("-id")
+
+    students = []
+
+    for profile in profiles:
+
+        # ==========================================
+        # ACCOUNT STATUS
+        # ==========================================
+
+        if not profile.user.is_active:
+            account_status = "Inactive"
+
+        elif profile.profile_completion < 100:
+            account_status = "Pending"
+
+        else:
+            account_status = "Active"
+
+        # ==========================================
+        # REGISTRATION DATE
+        # ==========================================
+
+        registration_date = ""
+
+        if profile.user.date_joined:
+            registration_date = profile.user.date_joined.strftime(
+                "%d %b %Y"
+            )
+
+        # ==========================================
+        # STUDENT DATA
+        # ==========================================
+
+        students.append(
+            {
+                "id": profile.id,
+                "full_name": profile.full_name or "Not Provided",
+                "email": profile.user.email or "",
+                "course": profile.course or "Not Provided",
+                "college": profile.college or "Not Provided",
+                "category": profile.category or "Not Provided",
+                "registration_date": registration_date,
+                "account_status": account_status,
+                "profile_completion": profile.profile_completion,
+                "user_id": profile.user.id,
+            }
+        )
+
+    # ==========================================
+    # RESPONSE
+    # ==========================================
+
+    return Response(
+        {
+            "count": len(students),
+            "students": students
         },
         status=200
     )

@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 
+from applications.models import Application
+
 
 class StudentDocument(models.Model):
 
@@ -28,6 +30,14 @@ class StudentDocument(models.Model):
         related_name="documents"
     )
 
+    application = models.ForeignKey(
+        Application,
+        on_delete=models.CASCADE,
+        related_name="documents",
+        null=True,
+        blank=True
+    )
+
     document_type = models.CharField(
         max_length=50,
         choices=DOCUMENT_TYPES
@@ -44,7 +54,11 @@ class StudentDocument(models.Model):
     )
 
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.student.email} - {self.get_document_type_display()}"
+        return (
+            f"{self.student.email} - "
+            f"{self.get_document_type_display()}"
+        )

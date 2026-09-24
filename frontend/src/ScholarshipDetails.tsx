@@ -48,6 +48,11 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    const [applying, setApplying] = useState(false);
+    const [applicationMessage, setApplicationMessage] = useState("");
+    const [alreadyApplied, setAlreadyApplied] = useState(false);
+    const [applicationSuccess, setApplicationSuccess] = useState(false);
+
     useEffect(() => {
         const fetchScholarshipDetails = async () => {
             try {
@@ -59,7 +64,9 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                 );
 
                 if (!response.ok) {
-                    throw new Error("Failed to fetch scholarship details");
+                    throw new Error(
+                        "Failed to fetch scholarship details"
+                    );
                 }
 
                 const data = await response.json();
@@ -82,12 +89,89 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
         fetchScholarshipDetails();
     }, [scholarshipId]);
 
+    const handleApply = async () => {
+        const token = localStorage.getItem(
+            "scholarbridge_token"
+        );
+
+        if (!token) {
+            setApplicationMessage(
+                "Please login again before applying."
+            );
+
+            setApplicationSuccess(false);
+
+            return;
+        }
+
+        try {
+            setApplying(true);
+            setApplicationMessage("");
+            setApplicationSuccess(false);
+
+            const response = await fetch(
+                `http://127.0.0.1:8000/application/api/apply/${scholarshipId}/`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setApplicationMessage(
+                    data.message ||
+                        "Your application has been submitted successfully."
+                );
+
+                setApplicationSuccess(true);
+                setAlreadyApplied(true);
+            } else {
+                setApplicationMessage(
+                    data.message ||
+                        "Unable to submit application."
+                );
+
+                setApplicationSuccess(false);
+
+                if (
+                    response.status === 400 &&
+                    data.message
+                        ?.toLowerCase()
+                        .includes("already applied")
+                ) {
+                    setAlreadyApplied(true);
+                }
+            }
+        } catch (error) {
+            console.error(
+                "Application submission error:",
+                error
+            );
+
+            setApplicationMessage(
+                "Unable to submit application. Please make sure Django server is running."
+            );
+
+            setApplicationSuccess(false);
+        } finally {
+            setApplying(false);
+        }
+    };
+
     if (loading) {
         return (
             <div className="scholarship-details-page">
                 <div className="details-loading">
                     <div className="details-spinner"></div>
-                    <p>Loading scholarship details...</p>
+
+                    <p>
+                        Loading scholarship details...
+                    </p>
                 </div>
             </div>
         );
@@ -98,6 +182,7 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
             <div className="scholarship-details-page">
                 <div className="details-error">
                     <span>⚠️</span>
+
                     <p>{error}</p>
 
                     <button
@@ -117,7 +202,10 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
             <div className="scholarship-details-page">
                 <div className="details-error">
                     <span>🎓</span>
-                    <p>Scholarship details not found.</p>
+
+                    <p>
+                        Scholarship details not found.
+                    </p>
 
                     <button
                         type="button"
@@ -135,6 +223,7 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
         <div className="scholarship-details-page">
 
             {/* Header */}
+
             <div className="details-header">
 
                 <button
@@ -146,39 +235,50 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                 </button>
 
                 <div className="details-heading">
+
                     <span className="details-label">
                         SCHOLARSHIP DETAILS
                     </span>
 
-                    <h1>{scholarship.title}</h1>
+                    <h1>
+                        {scholarship.title}
+                    </h1>
 
                     <p>
-                        Explore complete scholarship information,
-                        eligibility criteria, and required documents.
+                        Explore complete scholarship
+                        information, eligibility criteria,
+                        and required documents.
                     </p>
+
                 </div>
 
             </div>
 
-
             {/* Main Content */}
+
             <div className="details-container">
 
                 {/* Overview Card */}
+
                 <section className="details-card overview-card">
 
                     <div className="details-card-heading">
+
                         <div className="details-section-icon">
                             🎓
                         </div>
 
                         <div>
-                            <h2>Scholarship Overview</h2>
+                            <h2>
+                                Scholarship Overview
+                            </h2>
+
                             <p>
-                                Important information about this
-                                scholarship opportunity.
+                                Important information about
+                                this scholarship opportunity.
                             </p>
                         </div>
+
                     </div>
 
                     <div className="overview-description">
@@ -188,6 +288,7 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                     <div className="overview-grid">
 
                         <div className="overview-item">
+
                             <span className="overview-icon">
                                 🏢
                             </span>
@@ -201,9 +302,11 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                                     {scholarship.provider_name}
                                 </strong>
                             </div>
+
                         </div>
 
                         <div className="overview-item">
+
                             <span className="overview-icon">
                                 💰
                             </span>
@@ -214,14 +317,17 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                                 </span>
 
                                 <strong>
-                                    ₹{Number(
+                                    ₹
+                                    {Number(
                                         scholarship.amount
                                     ).toLocaleString("en-IN")}
                                 </strong>
                             </div>
+
                         </div>
 
                         <div className="overview-item">
+
                             <span className="overview-icon">
                                 📅
                             </span>
@@ -232,12 +338,16 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                                 </span>
 
                                 <strong>
-                                    {scholarship.application_start}
+                                    {
+                                        scholarship.application_start
+                                    }
                                 </strong>
                             </div>
+
                         </div>
 
                         <div className="overview-item">
+
                             <span className="overview-icon">
                                 ⏰
                             </span>
@@ -251,143 +361,237 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                                     {scholarship.deadline}
                                 </strong>
                             </div>
+
                         </div>
 
                     </div>
 
                 </section>
 
-
                 {/* Eligibility */}
+
                 <section className="details-card">
 
                     <div className="details-card-heading">
+
                         <div className="details-section-icon">
                             ✅
                         </div>
 
                         <div>
-                            <h2>Eligibility Criteria</h2>
+                            <h2>
+                                Eligibility Criteria
+                            </h2>
+
                             <p>
-                                Check whether you meet the scholarship
-                                requirements.
+                                Check whether you meet the
+                                scholarship requirements.
                             </p>
                         </div>
+
                     </div>
 
                     {scholarship.eligibility ? (
+
                         <div className="eligibility-grid">
 
                             <div className="eligibility-item">
-                                <span>Eligible Courses</span>
+
+                                <span>
+                                    Eligible Courses
+                                </span>
+
                                 <strong>
-                                    {scholarship.eligibility.eligible_courses ||
-                                        "Not specified"}
+                                    {
+                                        scholarship
+                                            .eligibility
+                                            .eligible_courses ||
+                                        "Not specified"
+                                    }
                                 </strong>
+
                             </div>
 
                             <div className="eligibility-item">
-                                <span>Specialization</span>
+
+                                <span>
+                                    Specialization
+                                </span>
+
                                 <strong>
-                                    {scholarship.eligibility.specialization ||
-                                        "Not specified"}
+                                    {
+                                        scholarship
+                                            .eligibility
+                                            .specialization ||
+                                        "Not specified"
+                                    }
                                 </strong>
+
                             </div>
 
                             <div className="eligibility-item">
-                                <span>Minimum Percentage</span>
+
+                                <span>
+                                    Minimum Percentage
+                                </span>
+
                                 <strong>
-                                    {scholarship.eligibility.minimum_percentage
-                                        ? `${scholarship.eligibility.minimum_percentage}%`
-                                        : "Not specified"}
+                                    {
+                                        scholarship
+                                            .eligibility
+                                            .minimum_percentage
+                                            ? `${scholarship.eligibility.minimum_percentage}%`
+                                            : "Not specified"
+                                    }
                                 </strong>
+
                             </div>
 
                             <div className="eligibility-item">
-                                <span>Maximum Family Income</span>
+
+                                <span>
+                                    Maximum Family Income
+                                </span>
+
                                 <strong>
-                                    {scholarship.eligibility.maximum_income
-                                        ? `₹${Number(
-                                            scholarship.eligibility
-                                                .maximum_income
-                                        ).toLocaleString("en-IN")}`
-                                        : "Not specified"}
+                                    {
+                                        scholarship
+                                            .eligibility
+                                            .maximum_income
+                                            ? `₹${Number(
+                                                scholarship
+                                                    .eligibility
+                                                    .maximum_income
+                                            ).toLocaleString(
+                                                "en-IN"
+                                            )}`
+                                            : "Not specified"
+                                    }
                                 </strong>
+
                             </div>
 
                             <div className="eligibility-item">
-                                <span>Category</span>
+
+                                <span>
+                                    Category
+                                </span>
+
                                 <strong>
-                                    {scholarship.eligibility.category ||
-                                        "Not specified"}
+                                    {
+                                        scholarship
+                                            .eligibility
+                                            .category ||
+                                        "Not specified"
+                                    }
                                 </strong>
+
                             </div>
 
                             <div className="eligibility-item">
-                                <span>Gender</span>
+
+                                <span>
+                                    Gender
+                                </span>
+
                                 <strong>
-                                    {scholarship.eligibility.gender ||
-                                        "Not specified"}
+                                    {
+                                        scholarship
+                                            .eligibility
+                                            .gender ||
+                                        "Not specified"
+                                    }
                                 </strong>
+
                             </div>
 
                             <div className="eligibility-item">
-                                <span>State</span>
+
+                                <span>
+                                    State
+                                </span>
+
                                 <strong>
-                                    {scholarship.eligibility.state ||
-                                        "Not specified"}
+                                    {
+                                        scholarship
+                                            .eligibility
+                                            .state ||
+                                        "Not specified"
+                                    }
                                 </strong>
+
                             </div>
 
                             <div className="eligibility-item full-width">
-                                <span>Other Criteria</span>
+
+                                <span>
+                                    Other Criteria
+                                </span>
+
                                 <strong>
-                                    {scholarship.eligibility.other_criteria ||
-                                        "No additional criteria specified"}
+                                    {
+                                        scholarship
+                                            .eligibility
+                                            .other_criteria ||
+                                        "No additional criteria specified"
+                                    }
                                 </strong>
+
                             </div>
 
                         </div>
+
                     ) : (
+
                         <div className="no-details">
                             Eligibility criteria not available.
                         </div>
+
                     )}
 
                 </section>
 
-
                 {/* Required Documents */}
+
                 <section className="details-card">
 
                     <div className="details-card-heading">
+
                         <div className="details-section-icon">
                             📄
                         </div>
 
                         <div>
-                            <h2>Required Documents</h2>
+                            <h2>
+                                Required Documents
+                            </h2>
+
                             <p>
-                                Documents required for the scholarship
-                                application.
+                                Documents required for the
+                                scholarship application.
                             </p>
                         </div>
+
                     </div>
 
                     {scholarship.required_documents.length > 0 ? (
+
                         <div className="documents-list">
 
                             {scholarship.required_documents.map(
                                 (document) => (
+
                                     <div
                                         className="document-item"
                                         key={document.id}
                                     >
+
                                         <div className="document-icon">
                                             📄
                                         </div>
 
                                         <div className="document-content">
+
                                             <h3>
                                                 {
                                                     document.document_type_display
@@ -399,6 +603,7 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                                                     document.description
                                                 }
                                             </p>
+
                                         </div>
 
                                         <span
@@ -408,38 +613,146 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                                                     : "optional-badge"
                                             }
                                         >
-                                            {document.is_mandatory
-                                                ? "Mandatory"
-                                                : "Optional"}
+                                            {
+                                                document.is_mandatory
+                                                    ? "Mandatory"
+                                                    : "Optional"
+                                            }
                                         </span>
+
                                     </div>
                                 )
                             )}
 
                         </div>
+
                     ) : (
+
                         <div className="no-details">
                             No required documents specified.
                         </div>
+
                     )}
 
                 </section>
 
+                {/* Apply Scholarship */}
 
-                {/* Bottom Back Button */}
-                <div className="details-bottom-actions">
+                <section className="details-apply-section">
+
+                    <div className="apply-content">
+
+                        <div className="apply-icon">
+                            🎓
+                        </div>
+
+                        <div className="apply-text">
+
+                            <h2>
+                                Ready to Apply?
+                            </h2>
+
+                            <p>
+                                Submit your application for this
+                                scholarship opportunity.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                     <button
                         type="button"
-                        className="details-bottom-back"
-                        onClick={onBack}
+                        className={`details-apply-btn ${
+                            alreadyApplied
+                                ? "application-submitted-btn"
+                                : ""
+                        }`}
+                        onClick={handleApply}
+                        disabled={
+                            applying ||
+                            alreadyApplied
+                        }
                     >
-                        ← Back to Scholarships
+
+                        {applying ? (
+                            <>
+                                <span className="apply-spinner"></span>
+
+                                Submitting Application...
+                            </>
+                        ) : alreadyApplied ? (
+                            <>
+                                <span className="apply-check-icon">
+                                    ✓
+                                </span>
+
+                                Application Submitted
+                            </>
+                        ) : (
+                            <>
+                                Apply Now
+
+                                <span className="apply-arrow">
+                                    →
+                                </span>
+                            </>
+                        )}
+
                     </button>
 
-                </div>
+                    {applicationMessage && (
+
+                        <div
+                            className={
+                                applicationSuccess
+                                    ? "application-success-card"
+                                    : "application-error-card"
+                            }
+                        >
+
+                            <div
+                                className={
+                                    applicationSuccess
+                                        ? "application-status-icon success-icon"
+                                        : "application-status-icon error-icon"
+                                }
+                            >
+                                {applicationSuccess
+                                    ? "✓"
+                                    : "!"}
+                            </div>
+
+                            <div className="application-status-content">
+
+                                <h3>
+                                    {applicationSuccess
+                                        ? "Application Submitted Successfully"
+                                        : "Application Could Not Be Submitted"}
+                                </h3>
+
+                                <p>
+                                    {applicationMessage}
+                                </p>
+
+                                {applicationSuccess && (
+                                    <span className="application-next-step">
+                                        You can track your application status from
+                                        <strong> My Applications </strong>
+                                        in your dashboard.
+                                    </span>
+                                )}
+
+                            </div>
+
+                        </div>
+
+                    )}
+
+                </section>
 
             </div>
+
         </div>
     );
 };

@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./StudentDashboard.css";
 
-/* ---------- Props ---------- */
-
-interface StudentDashboardProps {
-    onFindScholarships?: () => void;
-    onAIRecommendations?: () => void;
-    onMyApplications?: () => void;
-    onSavedScholarships?: () => void;
-    onNotifications?: () => void;
-    onMyDocuments?: () => void;
-    onMyProfile?: () => void;
-}
-
 /* ---------- Inline SVG Icon Components ---------- */
 
 const IconDashboard = () => (
@@ -386,28 +374,47 @@ const deadlines = [
 ];
 
 const filterTabs = [
-    "All Matches (12)",
     "Merit-Based",
     "Need-Based",
     "STEM & Tech",
 ];
 
-const scholarship = {
-    title: "Tata Scholarship for Higher Education",
-    org: "Tata Trusts Foundation | Mumbai, India",
-    tags: [
-        "Merit-cum-Means",
-        "STEM & Engg",
-        "Undergraduate",
-    ],
-    amount: "₹50,000 / year",
-    deadline: "Deadline: 30 Sep 2026",
-    match: "96% AI Match",
+/* ---------- Formatting helpers ---------- */
+
+const formatINRAmount = (amount) => {
+    const numericAmount = parseFloat(amount);
+
+    if (isNaN(numericAmount)) {
+        return "";
+    }
+
+    return `₹${Math.round(numericAmount).toLocaleString(
+        "en-IN"
+    )}`;
+};
+
+const formatDeadlineDate = (deadline) => {
+    const deadlineDate = new Date(deadline);
+
+    if (isNaN(deadlineDate.getTime())) {
+        return "";
+    }
+
+    const formatted = deadlineDate.toLocaleDateString(
+        "en-GB",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+        }
+    );
+
+    return `Deadline: ${formatted}`;
 };
 
 /* ---------- Component ---------- */
 
-const StudentDashboard: React.FC<StudentDashboardProps> = ({
+const StudentDashboard = ({
     onFindScholarships,
     onAIRecommendations,
     onMyApplications,
@@ -415,9 +422,22 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
     onNotifications,
     onMyDocuments,
     onMyProfile,
+    onApplyScholarship,
 }) => {
     const [studentName, setStudentName] = useState("Student");
     const [studentEmail, setStudentEmail] = useState("");
+    const [applicationsCount, setApplicationsCount] = useState(0);
+    const [notificationsCount, setNotificationsCount] = useState(0);
+    const [savedScholarshipsCount, setSavedScholarshipsCount] =
+        useState(0);
+    const [aiMatchesCount, setAiMatchesCount] = useState(0);
+    const [closingSoonCount, setClosingSoonCount] = useState(0);
+    const [recommendations, setRecommendations] = useState([]);
+
+    /* ---------- Logout Modal State ---------- */
+
+    const [showLogoutModal, setShowLogoutModal] =
+        useState(false);
 
     useEffect(() => {
         const savedUser =
@@ -438,7 +458,7 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                             .replace(/[._-]/g, " ")
                             .replace(
                                 /\b\w/g,
-                                (letter: string) =>
+                                (letter) =>
                                     letter.toUpperCase()
                             )
                     );
@@ -454,13 +474,305 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                 );
             }
         }
+
+        const token = localStorage.getItem(
+            "scholarbridge_token"
+        );
+
+        if (token) {
+            /* ---------- Applications ---------- */
+
+            fetch(
+                "http://127.0.0.1:8000/application/api/",
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    },
+                }
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    if (Array.isArray(data)) {
+                        setApplicationsCount(data.length);
+                    } else if (
+                        data &&
+                        Array.isArray(data.applications)
+                    ) {
+                        setApplicationsCount(
+                            data.applications.length
+                        );
+                    } else if (
+                        data &&
+                        Array.isArray(data.results)
+                    ) {
+                        setApplicationsCount(
+                            data.results.length
+                        );
+                    }
+                })
+                .catch((error) => {
+                    console.error(
+                        "Unable to fetch applications:",
+                        error
+                    );
+                });
+
+            /* ---------- Notifications ---------- */
+
+            fetch(
+                "http://127.0.0.1:8000/api/notifications/",
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    },
+                }
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    if (Array.isArray(data)) {
+                        setNotificationsCount(data.length);
+                    } else if (
+                        data &&
+                        Array.isArray(data.notifications)
+                    ) {
+                        setNotificationsCount(
+                            data.notifications.length
+                        );
+                    } else if (
+                        data &&
+                        Array.isArray(data.results)
+                    ) {
+                        setNotificationsCount(
+                            data.results.length
+                        );
+                    }
+                })
+                .catch((error) => {
+                    console.error(
+                        "Unable to fetch notifications:",
+                        error
+                    );
+                });
+
+            /* ---------- Saved Scholarships ---------- */
+
+            fetch(
+                "http://127.0.0.1:8000/api/scholarships/saved/",
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        "Content-Type":
+                            "application/json",
+                    },
+                }
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    if (Array.isArray(data)) {
+                        setSavedScholarshipsCount(
+                            data.length
+                        );
+                    } else if (
+                        data &&
+                        Array.isArray(
+                            data.saved_scholarships
+                        )
+                    ) {
+                        setSavedScholarshipsCount(
+                            data.saved_scholarships.length
+                        );
+                    } else if (
+                        data &&
+                        Array.isArray(data.scholarships)
+                    ) {
+                        setSavedScholarshipsCount(
+                            data.scholarships.length
+                        );
+                    } else if (
+                        data &&
+                        Array.isArray(data.results)
+                    ) {
+                        setSavedScholarshipsCount(
+                            data.results.length
+                        );
+                    }
+                })
+                .catch((error) => {
+                    console.error(
+                        "Unable to fetch saved scholarships:",
+                        error
+                    );
+                });
+
+            /* ---------- AI Recommendations ---------- */
+
+            fetch(
+                "http://127.0.0.1:8000/recommendations/api/",
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        "Content-Type":
+                            "application/json",
+                    },
+                }
+            )
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(
+                            `AI recommendations request failed: ${response.status}`
+                        );
+                    }
+
+                    return response.json();
+                })
+                .then((data) => {
+                    let recommendationList = [];
+
+                    if (Array.isArray(data)) {
+                        recommendationList = data;
+                    } else if (
+                        data &&
+                        Array.isArray(
+                            data.recommendations
+                        )
+                    ) {
+                        recommendationList =
+                            data.recommendations;
+                    } else if (
+                        data &&
+                        Array.isArray(data.results)
+                    ) {
+                        recommendationList =
+                            data.results;
+                    } else if (
+                        data &&
+                        Array.isArray(data.data)
+                    ) {
+                        recommendationList =
+                            data.data;
+                    }
+
+                    setAiMatchesCount(
+                        recommendationList.length
+                    );
+
+                    setRecommendations(
+                        recommendationList
+                    );
+                })
+                .catch((error) => {
+                    console.error(
+                        "Unable to fetch AI recommendations:",
+                        error
+                    );
+
+                    setAiMatchesCount(0);
+                    setRecommendations([]);
+                });
+
+            /* ---------- Closing Soon Scholarships ---------- */
+
+            fetch(
+                "http://127.0.0.1:8000/api/scholarships/",
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        "Content-Type":
+                            "application/json",
+                    },
+                }
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    if (Array.isArray(data)) {
+                        const today = new Date();
+
+                        today.setHours(
+                            0,
+                            0,
+                            0,
+                            0
+                        );
+
+                        const thirtyDaysOut =
+                            new Date(today);
+
+                        thirtyDaysOut.setDate(
+                            thirtyDaysOut.getDate() + 30
+                        );
+
+                        const closingSoon =
+                            data.filter((item) => {
+                                if (
+                                    !item ||
+                                    !item.deadline
+                                ) {
+                                    return false;
+                                }
+
+                                const deadlineDate =
+                                    new Date(
+                                        item.deadline
+                                    );
+
+                                if (
+                                    isNaN(
+                                        deadlineDate.getTime()
+                                    )
+                                ) {
+                                    return false;
+                                }
+
+                                deadlineDate.setHours(
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                );
+
+                                return (
+                                    deadlineDate >= today &&
+                                    deadlineDate <=
+                                        thirtyDaysOut
+                                );
+                            }).length;
+
+                        setClosingSoonCount(
+                            closingSoon
+                        );
+                    }
+                })
+                .catch((error) => {
+                    console.error(
+                        "Unable to fetch scholarships:",
+                        error
+                    );
+                });
+        }
     }, []);
 
+    /* ---------- Logout ---------- */
+
     const handleLogout = () => {
-        localStorage.removeItem("scholarbridge_token");
-        localStorage.removeItem("scholarbridge_user");
+        setShowLogoutModal(true);
+    };
+
+    const confirmLogout = () => {
+        localStorage.removeItem(
+            "scholarbridge_token"
+        );
+
+        localStorage.removeItem(
+            "scholarbridge_user"
+        );
+
+        setShowLogoutModal(false);
 
         window.location.reload();
+    };
+
+    const cancelLogout = () => {
+        setShowLogoutModal(false);
     };
 
     return (
@@ -488,10 +800,11 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
                         <button
                             key={item.label}
-                            className={`sb-nav-item${item.active
+                            className={`sb-nav-item${
+                                item.active
                                     ? " active"
                                     : ""
-                                }`}
+                            }`}
                             type="button"
                             onClick={() => {
 
@@ -537,15 +850,12 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                                     onMyDocuments?.();
                                 }
 
-                                /* My Profile */
-
                                 if (
                                     item.label ===
                                     "My Profile"
                                 ) {
                                     onMyProfile?.();
                                 }
-
                             }}
                         >
 
@@ -563,9 +873,10 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                                 </span>
                             )}
 
-                            {item.dot && (
-                                <span className="sb-nav-dot" />
-                            )}
+                            {item.dot &&
+                                notificationsCount > 0 && (
+                                    <span className="sb-nav-dot" />
+                                )}
 
                         </button>
 
@@ -686,7 +997,9 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
                             <IconBell />
 
-                            <span className="sb-icon-dot" />
+                            {notificationsCount > 0 && (
+                                <span className="sb-icon-dot" />
+                            )}
 
                         </button>
 
@@ -698,7 +1011,8 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                             title="Open My Profile"
                             onKeyDown={(event) => {
                                 if (
-                                    event.key === "Enter" ||
+                                    event.key ===
+                                        "Enter" ||
                                     event.key === " "
                                 ) {
                                     onMyProfile?.();
@@ -721,7 +1035,8 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                                 </span>
 
                                 <span className="sb-user-role">
-                                    {studentEmail || "Student"}
+                                    {studentEmail ||
+                                        "Student"}
                                 </span>
 
                             </div>
@@ -836,7 +1151,21 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                                         </div>
 
                                         <div className="sb-stat-value">
-                                            {card.value}
+
+                                            {card.label ===
+                                            "Applications"
+                                                ? applicationsCount
+                                                : card.label ===
+                                                  "Saved Opportunities"
+                                                    ? savedScholarshipsCount
+                                                    : card.label ===
+                                                      "AI Matches"
+                                                        ? aiMatchesCount
+                                                        : card.label ===
+                                                          "Closing Soon"
+                                                            ? closingSoonCount
+                                                            : card.value}
+
                                         </div>
 
                                         <div className="sb-stat-label">
@@ -888,7 +1217,9 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                                         }
                                     >
 
-                                        View All (12)
+                                        View All (
+                                        {recommendations.length}
+                                        )
 
                                         <IconArrowRight />
 
@@ -898,15 +1229,19 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
                                 <div className="sb-filter-tabs">
 
-                                    {filterTabs.map(
+                                    {[
+                                        `All Matches (${recommendations.length})`,
+                                        ...filterTabs,
+                                    ].map(
                                         (tab, i) => (
 
                                             <button
                                                 key={tab}
-                                                className={`sb-filter-tab${i === 0
+                                                className={`sb-filter-tab${
+                                                    i === 0
                                                         ? " active"
                                                         : ""
-                                                    }`}
+                                                }`}
                                                 type="button"
                                             >
                                                 {tab}
@@ -917,85 +1252,131 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
                                 </div>
 
-                                <div className="sb-scholarship-card">
+                                {recommendations.length ===
+                                0 ? (
 
-                                    <div className="sb-scholarship-main">
+                                    <div className="sb-scholarship-card">
 
-                                        <div className="sb-scholarship-icon">
-                                            <IconTrophy />
-                                        </div>
+                                        <div className="sb-scholarship-main">
 
-                                        <div className="sb-scholarship-info">
+                                            <div className="sb-scholarship-icon">
+                                                <IconTrophy />
+                                            </div>
 
-                                            <div className="sb-scholarship-title-row">
+                                            <div className="sb-scholarship-info">
 
-                                                <h4>
-                                                    {
-                                                        scholarship.title
-                                                    }
-                                                </h4>
-
-                                                <span className="sb-match-badge">
-                                                    {
-                                                        scholarship.match
-                                                    }
-                                                </span>
+                                                <p className="sb-scholarship-org">
+                                                    No AI recommendations available yet.
+                                                    Complete your profile to get personalized scholarship matches.
+                                                </p>
 
                                             </div>
 
-                                            <p className="sb-scholarship-org">
-                                                {scholarship.org}
-                                            </p>
+                                        </div>
 
-                                            <div className="sb-scholarship-tags">
+                                    </div>
 
-                                                {scholarship.tags.map(
-                                                    (tag) => (
+                                ) : (
 
-                                                        <span
-                                                            className="sb-tag"
-                                                            key={tag}
-                                                        >
-                                                            {tag}
-                                                        </span>
+                                    <div className="sb-scholarship-card">
 
-                                                    )
+                                        <div className="sb-scholarship-main">
+
+                                            <div className="sb-scholarship-icon">
+                                                <IconTrophy />
+                                            </div>
+
+                                            <div className="sb-scholarship-info">
+
+                                                <div className="sb-scholarship-title-row">
+
+                                                    <h4>
+                                                        {
+                                                            recommendations[0]
+                                                                .scholarship_title
+                                                        }
+                                                    </h4>
+
+                                                    <span className="sb-match-badge">
+                                                        {`${recommendations[0].match_score}% AI Match`}
+                                                    </span>
+
+                                                </div>
+
+                                                {recommendations[0]
+                                                    .org && (
+                                                    <p className="sb-scholarship-org">
+                                                        {
+                                                            recommendations[0]
+                                                                .org
+                                                        }
+                                                    </p>
+                                                )}
+
+                                                {recommendations[0]
+                                                    .tags && (
+                                                    <div className="sb-scholarship-tags">
+
+                                                        {recommendations[0].tags.map(
+                                                            (tag) => (
+
+                                                                <span
+                                                                    className="sb-tag"
+                                                                    key={
+                                                                        tag
+                                                                    }
+                                                                >
+                                                                    {tag}
+                                                                </span>
+
+                                                            )
+                                                        )}
+
+                                                    </div>
                                                 )}
 
                                             </div>
 
                                         </div>
 
-                                    </div>
+                                        <div className="sb-scholarship-side">
 
-                                    <div className="sb-scholarship-side">
+                                            <div className="sb-scholarship-amount">
+                                                {formatINRAmount(
+                                                    recommendations[0]
+                                                        .scholarship_amount
+                                                )}
+                                            </div>
 
-                                        <div className="sb-scholarship-amount">
-                                            {
-                                                scholarship.amount
-                                            }
+                                            <div className="sb-scholarship-deadline">
+
+                                                <IconClock />
+
+                                                {formatDeadlineDate(
+                                                    recommendations[0]
+                                                        .deadline
+                                                )}
+
+                                            </div>
+
+                                            <button
+                                                className="sb-apply-btn"
+                                                type="button"
+                                                onClick={() =>
+                                                    onApplyScholarship?.(
+                                                        recommendations[0]
+                                                            .scholarship
+                                                    )
+                                                }
+                                            >
+                                                Apply Now
+                                            </button>
+
                                         </div>
 
-                                        <div className="sb-scholarship-deadline">
-
-                                            <IconClock />
-
-                                            {
-                                                scholarship.deadline
-                                            }
-
-                                        </div>
-
-                                        <button
-                                            className="sb-apply-btn"
-                                            type="button"
-                                        >
-                                            Apply Now
-                                        </button>
-
                                     </div>
 
-                                </div>
+                                )}
 
                             </section>
 
@@ -1056,10 +1437,11 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                                             >
 
                                                 <span
-                                                    className={`sb-check-icon${item.done
+                                                    className={`sb-check-icon${
+                                                        item.done
                                                             ? " done"
                                                             : ""
-                                                        }`}
+                                                    }`}
                                                 >
 
                                                     {item.done ? (
@@ -1075,10 +1457,11 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                                                 </span>
 
                                                 <span
-                                                    className={`sb-check-status${item.done
+                                                    className={`sb-check-status${
+                                                        item.done
                                                             ? " verified"
                                                             : " pending"
-                                                        }`}
+                                                    }`}
                                                 >
                                                     {item.status}
                                                 </span>
@@ -1134,10 +1517,11 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                             {deadlines.map((d) => (
 
                                 <li
-                                    className={`sb-deadline-item${d.urgent
+                                    className={`sb-deadline-item${
+                                        d.urgent
                                             ? " urgent"
                                             : ""
-                                        }`}
+                                    }`}
                                     key={d.title}
                                 >
 
@@ -1189,6 +1573,58 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({
                 </div>
 
             </div>
+
+            {/* Logout Confirmation Modal */}
+
+            {showLogoutModal && (
+                <div
+                    className="sb-logout-overlay"
+                    onClick={cancelLogout}
+                >
+                    <div
+                        className="sb-logout-modal"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="logout-modal-title"
+                        onClick={(event) =>
+                            event.stopPropagation()
+                        }
+                    >
+                        <div className="sb-logout-icon">
+                            <IconLogout />
+                        </div>
+
+                        <h3 id="logout-modal-title">
+                            Are you sure you want to exit?
+                        </h3>
+
+                        <p>
+                            You will be logged out of your
+                            ScholarBridge AI student account.
+                        </p>
+
+                        <div className="sb-logout-actions">
+
+                            <button
+                                type="button"
+                                className="sb-logout-cancel"
+                                onClick={cancelLogout}
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="button"
+                                className="sb-logout-confirm"
+                                onClick={confirmLogout}
+                            >
+                                Logout
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Floating assistant */}
 

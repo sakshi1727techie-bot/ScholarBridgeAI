@@ -1,0 +1,636 @@
+/* =========================================================
+   DOCUMENT MANAGEMENT PAGE
+   ScholarBridge AI - Admin Dashboard
+   ========================================================= */
+
+.document-management-page {
+  width: 100%;
+  min-height: 100%;
+  padding: 28px 30px 32px;
+  box-sizing: border-box;
+  background: #f8fafc;
+}
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.document-management-header {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.document-management-header-content {
+  width: 100%;
+}
+
+.document-management-title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.5px;
+}
+
+.document-management-subtitle {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6b7280;
+  max-width: 760px;
+}
+
+/* =========================================================
+   STATISTICS SECTION
+   ========================================================= */
+
+.document-management-stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.document-management-stat-card {
+  min-width: 0;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.document-management-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: #dbe3ef;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
+}
+
+.document-management-stat-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.document-management-stat-label {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.document-management-stat-value {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 700;
+  color: #111827;
+}
+
+.document-management-stat-icon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 21px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   MAIN DOCUMENT PANEL
+   ========================================================= */
+
+.document-management-panel {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.document-management-panel-header {
+  width: 100%;
+  padding: 22px 24px;
+  border-bottom: 1px solid #eef0f3;
+  box-sizing: border-box;
+}
+
+.document-management-panel-heading {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #111827;
+}
+
+.document-management-panel-description {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b7280;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.document-management-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.document-management-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.document-management-table thead {
+  background: #f8fafc;
+}
+
+.document-management-table th {
+  padding: 14px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.55px;
+  white-space: nowrap;
+}
+
+.document-management-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f2f5;
+  vertical-align: middle;
+  font-size: 13px;
+  color: #374151;
+}
+
+.document-management-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.document-management-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.document-management-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================================================
+   STUDENT CELL
+   ========================================================= */
+
+.document-management-student-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 190px;
+}
+
+.document-management-avatar {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.document-management-student-details {
+  min-width: 0;
+}
+
+.document-management-student-name {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.document-management-student-email {
+  margin: 3px 0 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #9ca3af;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   DOCUMENT CELL
+   ========================================================= */
+
+.document-management-document-cell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 220px;
+}
+
+.document-management-file-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #f3f4f6;
+  font-size: 18px;
+}
+
+.document-management-document-details {
+  min-width: 0;
+}
+
+.document-management-document-name {
+  margin: 0;
+  max-width: 220px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.document-management-document-id {
+  margin: 3px 0 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #9ca3af;
+}
+
+/* =========================================================
+   DOCUMENT TYPE
+   ========================================================= */
+
+.document-management-type {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #4b5563;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   UPLOAD DATE
+   ========================================================= */
+
+.document-management-date {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #4b5563;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   VERIFICATION STATUS
+   ========================================================= */
+
+.document-management-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 82px;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 700;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.document-management-status-pending {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.document-management-status-verified {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.document-management-status-rejected {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.document-management-empty {
+  width: 100%;
+  min-height: 340px;
+  padding: 50px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.document-management-empty-icon {
+  width: 68px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  border-radius: 18px;
+  background: #eef2ff;
+  font-size: 30px;
+}
+
+.document-management-empty-title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.document-management-empty-text {
+  margin: 8px auto 0;
+  max-width: 500px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+/* =========================================================
+   INFORMATION FOOTER
+   ========================================================= */
+
+.document-management-info-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 13px 16px;
+  box-sizing: border-box;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.document-management-info-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   RESPONSIVE - 1200px
+   ========================================================= */
+
+@media (max-width: 1200px) {
+  .document-management-page {
+    padding: 24px 24px 30px;
+  }
+
+  .document-management-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .document-management-page {
+    padding: 22px 20px 28px;
+  }
+
+  .document-management-title {
+    font-size: 25px;
+  }
+
+  .document-management-panel-header {
+    padding: 20px;
+  }
+
+  .document-management-table th,
+  .document-management-table td {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - 768px
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .document-management-page {
+    padding: 20px 16px 24px;
+  }
+
+  .document-management-title {
+    font-size: 23px;
+  }
+
+  .document-management-subtitle {
+    font-size: 13px;
+  }
+
+  .document-management-stats {
+    gap: 14px;
+  }
+
+  .document-management-stat-card {
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  .document-management-stat-label {
+    font-size: 12px;
+  }
+
+  .document-management-stat-value {
+    font-size: 24px;
+  }
+
+  .document-management-stat-icon {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    font-size: 18px;
+  }
+
+  .document-management-panel {
+    border-radius: 15px;
+  }
+
+  .document-management-panel-heading {
+    font-size: 17px;
+  }
+
+  .document-management-info-footer {
+    align-items: flex-start;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - 560px
+   ========================================================= */
+
+@media (max-width: 560px) {
+  .document-management-page {
+    padding: 18px 12px 22px;
+  }
+
+  .document-management-header {
+    margin-bottom: 18px;
+  }
+
+  .document-management-title {
+    font-size: 21px;
+  }
+
+  .document-management-subtitle {
+    margin-top: 6px;
+    font-size: 12px;
+  }
+
+  .document-management-stats {
+    grid-template-columns: 1fr;
+    gap: 11px;
+    margin-bottom: 18px;
+  }
+
+  .document-management-stat-card {
+    padding: 16px;
+  }
+
+  .document-management-stat-value {
+    font-size: 23px;
+  }
+
+  .document-management-panel-header {
+    padding: 17px;
+  }
+
+  .document-management-panel-heading {
+    font-size: 16px;
+  }
+
+  .document-management-panel-description {
+    font-size: 12px;
+  }
+
+  .document-management-table {
+    min-width: 820px;
+  }
+
+  .document-management-info-footer {
+    padding: 11px 13px;
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - 380px
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .document-management-page {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .document-management-title {
+    font-size: 20px;
+  }
+
+  .document-management-stat-card {
+    padding: 14px;
+  }
+
+  .document-management-stat-icon {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+    font-size: 17px;
+  }
+
+  .document-management-empty {
+    min-height: 300px;
+    padding: 40px 16px;
+  }
+
+  .document-management-empty-icon {
+    width: 58px;
+    height: 58px;
+    font-size: 26px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .document-management-stat-card,
+  .document-management-table tbody tr {
+    transition: none;
+  }
+}

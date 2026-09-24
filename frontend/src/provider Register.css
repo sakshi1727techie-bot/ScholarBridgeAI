@@ -1,0 +1,760 @@
+/* =========================================================
+   PROVIDER REGISTER PAGE
+   ========================================================= */
+
+.pr-page {
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  background: #f5f8fc;
+  font-family: "Poppins", sans-serif;
+  color: #172033;
+}
+
+/* =========================================================
+   LEFT VISUAL PANEL
+   ========================================================= */
+
+.pr-visual {
+  position: relative;
+  min-height: 100vh;
+  padding: 42px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16, 52, 100, 0.97),
+      rgba(24, 82, 160, 0.96)
+    ),
+    url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=80")
+      center / cover no-repeat;
+  color: #ffffff;
+}
+
+.pr-visual::before {
+  content: "";
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  right: -210px;
+  top: -130px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.pr-visual::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  left: -170px;
+  bottom: -120px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.pr-visual__top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.pr-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.pr-visual__content {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  margin: auto 0;
+}
+
+.pr-visual__badge {
+  display: inline-flex;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  margin-bottom: 20px;
+}
+
+.pr-visual__title {
+  margin: 0;
+  font-size: clamp(32px, 3.3vw, 52px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -1.6px;
+}
+
+.pr-visual__text {
+  max-width: 490px;
+  margin: 22px 0 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.pr-visual__list {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pr-visual__list li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.pr-visual__tick {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 12px;
+}
+
+/* =========================================================
+   RIGHT FORM PANEL
+   ========================================================= */
+
+.pr-panel {
+  min-height: 100vh;
+  padding: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  background: #f5f8fc;
+}
+
+.pr-panel__inner {
+  width: 100%;
+  max-width: 720px;
+  padding: 34px 40px 30px;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.09);
+}
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.pr-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.pr-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.pr-brand__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2563eb;
+  box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.1);
+}
+
+.pr-brand__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.pr-topbar__help {
+  margin: 0;
+  font-size: 11px;
+  color: #7a8699;
+}
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.pr-heading {
+  padding: 28px 0 26px;
+}
+
+.pr-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.pr-heading__title {
+  margin: 13px 0 7px;
+  color: #2563eb;
+  font-size: 29px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+}
+
+.pr-heading__sub {
+  margin: 0;
+  color: #7a8699;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+.pr-alert {
+  margin-bottom: 20px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.pr-alert--success {
+  color: #166534;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.pr-alert--error {
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.pr-form {
+  width: 100%;
+}
+
+/* =========================================================
+   SECTION
+   IMPORTANT:
+   Inner boxes removed.
+   Outer panel remains unchanged.
+   ========================================================= */
+
+.pr-section {
+  width: 100%;
+  margin-bottom: 25px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.pr-section__title {
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf1f6;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   FIELDS
+   ========================================================= */
+
+.pr-field {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.pr-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #344054;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pr-req {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+.pr-control {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.pr-control__icon {
+  position: absolute;
+  left: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  color: #7b8798;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.pr-control input,
+.pr-control select,
+.pr-control textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dce3ec;
+  border-radius: 10px;
+  outline: none;
+  background: #ffffff;
+  color: #172033;
+  font-family: inherit;
+  font-size: 12px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.pr-control input,
+.pr-control select {
+  height: 44px;
+  padding: 0 42px;
+}
+
+.pr-control textarea {
+  min-height: 105px;
+  padding: 13px 42px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.pr-control input::placeholder,
+.pr-control textarea::placeholder {
+  color: #a2acba;
+}
+
+.pr-control input:focus,
+.pr-control select:focus,
+.pr-control textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: #ffffff;
+}
+
+.pr-control--select select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.pr-control__chevron {
+  position: absolute;
+  right: 15px;
+  color: #7b8798;
+  font-size: 9px;
+  pointer-events: none;
+}
+
+.pr-control--textarea {
+  align-items: flex-start;
+}
+
+.pr-control--textarea .pr-control__icon {
+  top: 14px;
+}
+
+/* =========================================================
+   FIELD ERROR
+   ========================================================= */
+
+.pr-field--error .pr-control input,
+.pr-field--error .pr-control select,
+.pr-field--error .pr-control textarea {
+  border-color: #ef4444;
+}
+
+.pr-field--error
+  .pr-control
+  input:focus,
+.pr-field--error
+  .pr-control
+  select:focus,
+.pr-field--error
+  .pr-control
+  textarea:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+}
+
+.pr-error {
+  margin-top: 5px;
+  color: #dc2626;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.pr-hint {
+  margin-top: 6px;
+  color: #8a95a5;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   PASSWORD TOGGLE
+   ========================================================= */
+
+.pr-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.pr-toggle:hover {
+  background: #f1f5f9;
+}
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+
+.pr-submit {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 4px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.pr-submit:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+}
+
+.pr-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   SPINNER
+   ========================================================= */
+
+.pr-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: pr-spin 0.7s linear infinite;
+}
+
+@keyframes pr-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   BACK TO SIGN IN
+   ========================================================= */
+
+.pr-signin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 18px;
+  color: #7a8699;
+  font-size: 11px;
+  text-align: center;
+}
+
+.pr-signin__btn {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pr-signin__btn:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   TRUST
+   ========================================================= */
+
+.pr-trust {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.pr-trust__rule {
+  flex: 1;
+  height: 1px;
+  background: #edf1f6;
+}
+
+.pr-trust__label {
+  color: #9aa5b5;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pr-trust__chip {
+  width: fit-content;
+  max-width: 100%;
+  margin: 12px auto 0;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #7a8699;
+  font-size: 9px;
+  text-align: center;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.pr-footer {
+  margin-top: 18px;
+  text-align: center;
+  color: #a0a9b7;
+  font-size: 9px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .pr-page {
+    grid-template-columns: 38% 62%;
+  }
+
+  .pr-visual {
+    padding: 35px 32px;
+  }
+
+  .pr-panel {
+    padding: 20px;
+  }
+
+  .pr-panel__inner {
+    padding: 30px;
+  }
+
+  .pr-visual__title {
+    font-size: 38px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 780px) {
+  .pr-page {
+    display: block;
+    min-height: 100vh;
+  }
+
+  .pr-visual {
+    min-height: auto;
+    padding: 28px 22px 35px;
+  }
+
+  .pr-visual__top {
+    flex-wrap: wrap;
+  }
+
+  .pr-visual__content {
+    margin-top: 55px;
+  }
+
+  .pr-visual__title {
+    font-size: 34px;
+  }
+
+  .pr-visual__text {
+    font-size: 13px;
+  }
+
+  .pr-panel {
+    min-height: auto;
+    padding: 18px;
+    align-items: flex-start;
+  }
+
+  .pr-panel__inner {
+    max-width: none;
+    padding: 26px 22px;
+    border-radius: 18px;
+  }
+
+  .pr-heading__title {
+    font-size: 25px;
+  }
+
+  .pr-section {
+    margin-bottom: 22px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .pr-section__title {
+    margin-bottom: 16px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .pr-visual {
+    padding: 22px 18px 30px;
+  }
+
+  .pr-chip {
+    font-size: 9px;
+    padding: 7px 10px;
+  }
+
+  .pr-visual__title {
+    font-size: 29px;
+  }
+
+  .pr-panel {
+    padding: 10px;
+  }
+
+  .pr-panel__inner {
+    padding: 22px 17px;
+    border-radius: 16px;
+  }
+
+  .pr-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pr-heading {
+    padding: 22px 0;
+  }
+
+  .pr-heading__title {
+    font-size: 23px;
+  }
+
+  .pr-control input,
+  .pr-control select {
+    height: 42px;
+  }
+
+  .pr-control textarea {
+    min-height: 95px;
+  }
+
+  .pr-signin {
+    font-size: 10px;
+  }
+
+  .pr-signin__btn {
+    font-size: 10px;
+  }
+
+  .pr-trust__label {
+    font-size: 8px;
+  }
+}

@@ -11,6 +11,13 @@ interface Recommendation {
     deadline: string;
 }
 
+interface RecommendationApiResponse {
+    success: boolean;
+    count: number;
+    recommendations: Recommendation[];
+    message?: string;
+}
+
 interface AIRecommendationsProps {
     onBack?: () => void;
 }
@@ -38,6 +45,7 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                     setError(
                         "Please login again to view your AI recommendations."
                     );
+                    setLoading(false);
                     return;
                 }
 
@@ -52,23 +60,45 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                     }
                 );
 
+                const data: RecommendationApiResponse =
+                    await response.json();
+
+                console.log(
+                    "AI Recommendations API Response:",
+                    data
+                );
+
                 if (!response.ok) {
                     throw new Error(
-                        "Failed to fetch recommendations"
+                        data?.message ||
+                            "Failed to fetch recommendations."
                     );
                 }
 
-                const data = await response.json();
+                if (!data.success) {
+                    throw new Error(
+                        data?.message ||
+                            "Unable to load recommendations."
+                    );
+                }
 
-                setRecommendations(data);
+                setRecommendations(
+                    Array.isArray(data.recommendations)
+                        ? data.recommendations
+                        : []
+                );
             } catch (error) {
                 console.error(
                     "Recommendation fetch error:",
                     error
                 );
 
+                setRecommendations([]);
+
                 setError(
-                    "Unable to load AI recommendations. Please make sure Django server is running."
+                    error instanceof Error
+                        ? error.message
+                        : "Unable to load AI recommendations. Please make sure Django server is running."
                 );
             } finally {
                 setLoading(false);
@@ -118,20 +148,24 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
 
             {loading && (
                 <div className="recommendation-loading">
+
                     <div className="recommendation-spinner"></div>
 
                     <p>
                         Analyzing your profile and finding matching
                         scholarships...
                     </p>
+
                 </div>
             )}
 
             {error && (
                 <div className="recommendation-error">
+
                     <span>⚠️</span>
 
                     <p>{error}</p>
+
                 </div>
             )}
 
@@ -162,6 +196,7 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                     <div className="recommendation-content">
 
                         <div className="recommendation-summary">
+
                             <div>
                                 <span>
                                     AI MATCHES
@@ -176,6 +211,7 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                                 These scholarships were matched
                                 using your eligibility information.
                             </p>
+
                         </div>
 
                         <div className="recommendation-grid">
@@ -194,6 +230,7 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                                             </div>
 
                                             <div className="match-score">
+
                                                 <strong>
                                                     {Number(
                                                         recommendation.match_score
@@ -203,6 +240,7 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                                                 <span>
                                                     Match
                                                 </span>
+
                                             </div>
 
                                         </div>
@@ -216,6 +254,7 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                                         <div className="recommendation-info">
 
                                             <div className="recommendation-info-item">
+
                                                 <span>
                                                     💰 Amount
                                                 </span>
@@ -228,9 +267,11 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                                                         "en-IN"
                                                     )}
                                                 </strong>
+
                                             </div>
 
                                             <div className="recommendation-info-item">
+
                                                 <span>
                                                     ⏰ Deadline
                                                 </span>
@@ -240,6 +281,7 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                                                         recommendation.deadline
                                                     }
                                                 </strong>
+
                                             </div>
 
                                         </div>
