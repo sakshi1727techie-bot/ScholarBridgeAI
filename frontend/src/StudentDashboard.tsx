@@ -328,6 +328,8 @@ const statCards = [
     },
 ];
 
+/* ---------- Profile Checklist ---------- */
+
 const profileChecklist = [
     {
         label: "Academic Transcripts",
@@ -341,8 +343,8 @@ const profileChecklist = [
     },
     {
         label: "Statement of Purpose",
-        status: "Pending Draft",
-        done: false,
+        status: "Verified",
+        done: true,
     },
 ];
 
@@ -379,9 +381,9 @@ const filterTabs = [
     "STEM & Tech",
 ];
 
-/* ---------- Formatting helpers ---------- */
+/* ---------- Formatting Helpers ---------- */
 
-const formatINRAmount = (amount) => {
+const formatINRAmount = (amount: any) => {
     const numericAmount = parseFloat(amount);
 
     if (isNaN(numericAmount)) {
@@ -393,7 +395,7 @@ const formatINRAmount = (amount) => {
     )}`;
 };
 
-const formatDeadlineDate = (deadline) => {
+const formatDeadlineDate = (deadline: any) => {
     const deadlineDate = new Date(deadline);
 
     if (isNaN(deadlineDate.getTime())) {
@@ -424,24 +426,45 @@ const StudentDashboard = ({
     onMyProfile,
     onApplyScholarship,
 }) => {
-    const [studentName, setStudentName] = useState("Student");
-    const [studentEmail, setStudentEmail] = useState("");
-    const [applicationsCount, setApplicationsCount] = useState(0);
-    const [notificationsCount, setNotificationsCount] = useState(0);
+    const [studentName, setStudentName] =
+        useState("Student");
+
+    const [studentEmail, setStudentEmail] =
+        useState("");
+
+    const [applicationsCount, setApplicationsCount] =
+        useState(0);
+
+    const [notificationsCount, setNotificationsCount] =
+        useState(0);
+
     const [savedScholarshipsCount, setSavedScholarshipsCount] =
         useState(0);
-    const [aiMatchesCount, setAiMatchesCount] = useState(0);
-    const [closingSoonCount, setClosingSoonCount] = useState(0);
-    const [recommendations, setRecommendations] = useState([]);
 
-    /* ---------- Logout Modal State ---------- */
+    const [aiMatchesCount, setAiMatchesCount] =
+        useState(0);
+
+    const [closingSoonCount, setClosingSoonCount] =
+        useState(0);
+
+    const [recommendations, setRecommendations] =
+        useState<any[]>([]);
+
+    /* ---------- Profile Strength ---------- */
+
+    const [profileStrength, setProfileStrength] =
+        useState(100);
+
+    /* ---------- Logout Modal ---------- */
 
     const [showLogoutModal, setShowLogoutModal] =
         useState(false);
 
     useEffect(() => {
         const savedUser =
-            localStorage.getItem("scholarbridge_user");
+            localStorage.getItem(
+                "scholarbridge_user"
+            );
 
         if (savedUser) {
             try {
@@ -458,7 +481,7 @@ const StudentDashboard = ({
                             .replace(/[._-]/g, " ")
                             .replace(
                                 /\b\w/g,
-                                (letter) =>
+                                (letter: string) =>
                                     letter.toUpperCase()
                             )
                     );
@@ -466,6 +489,22 @@ const StudentDashboard = ({
 
                 if (user.email) {
                     setStudentEmail(user.email);
+                }
+
+                /*
+                 * If profile completion is already available
+                 * in the saved user data, use it.
+                 * Otherwise the completed profile remains 100%.
+                 */
+                if (
+                    typeof user.profile_completion ===
+                        "number" &&
+                    user.profile_completion >= 0 &&
+                    user.profile_completion <= 100
+                ) {
+                    setProfileStrength(
+                        user.profile_completion
+                    );
                 }
             } catch (error) {
                 console.error(
@@ -475,9 +514,10 @@ const StudentDashboard = ({
             }
         }
 
-        const token = localStorage.getItem(
-            "scholarbridge_token"
-        );
+        const token =
+            localStorage.getItem(
+                "scholarbridge_token"
+            );
 
         if (token) {
             /* ---------- Applications ---------- */
@@ -486,17 +526,24 @@ const StudentDashboard = ({
                 "http://127.0.0.1:8000/application/api/",
                 {
                     headers: {
-                        Authorization: `Token ${token}`,
+                        Authorization:
+                            `Token ${token}`,
                     },
                 }
             )
-                .then((response) => response.json())
+                .then((response) =>
+                    response.json()
+                )
                 .then((data) => {
                     if (Array.isArray(data)) {
-                        setApplicationsCount(data.length);
+                        setApplicationsCount(
+                            data.length
+                        );
                     } else if (
                         data &&
-                        Array.isArray(data.applications)
+                        Array.isArray(
+                            data.applications
+                        )
                     ) {
                         setApplicationsCount(
                             data.applications.length
@@ -523,17 +570,24 @@ const StudentDashboard = ({
                 "http://127.0.0.1:8000/api/notifications/",
                 {
                     headers: {
-                        Authorization: `Token ${token}`,
+                        Authorization:
+                            `Token ${token}`,
                     },
                 }
             )
-                .then((response) => response.json())
+                .then((response) =>
+                    response.json()
+                )
                 .then((data) => {
                     if (Array.isArray(data)) {
-                        setNotificationsCount(data.length);
+                        setNotificationsCount(
+                            data.length
+                        );
                     } else if (
                         data &&
-                        Array.isArray(data.notifications)
+                        Array.isArray(
+                            data.notifications
+                        )
                     ) {
                         setNotificationsCount(
                             data.notifications.length
@@ -560,13 +614,16 @@ const StudentDashboard = ({
                 "http://127.0.0.1:8000/api/scholarships/saved/",
                 {
                     headers: {
-                        Authorization: `Token ${token}`,
+                        Authorization:
+                            `Token ${token}`,
                         "Content-Type":
                             "application/json",
                     },
                 }
             )
-                .then((response) => response.json())
+                .then((response) =>
+                    response.json()
+                )
                 .then((data) => {
                     if (Array.isArray(data)) {
                         setSavedScholarshipsCount(
@@ -583,7 +640,9 @@ const StudentDashboard = ({
                         );
                     } else if (
                         data &&
-                        Array.isArray(data.scholarships)
+                        Array.isArray(
+                            data.scholarships
+                        )
                     ) {
                         setSavedScholarshipsCount(
                             data.scholarships.length
@@ -610,7 +669,8 @@ const StudentDashboard = ({
                 "http://127.0.0.1:8000/recommendations/api/",
                 {
                     headers: {
-                        Authorization: `Token ${token}`,
+                        Authorization:
+                            `Token ${token}`,
                         "Content-Type":
                             "application/json",
                     },
@@ -626,10 +686,12 @@ const StudentDashboard = ({
                     return response.json();
                 })
                 .then((data) => {
-                    let recommendationList = [];
+                    let recommendationList: any[] =
+                        [];
 
                     if (Array.isArray(data)) {
-                        recommendationList = data;
+                        recommendationList =
+                            data;
                     } else if (
                         data &&
                         Array.isArray(
@@ -640,13 +702,17 @@ const StudentDashboard = ({
                             data.recommendations;
                     } else if (
                         data &&
-                        Array.isArray(data.results)
+                        Array.isArray(
+                            data.results
+                        )
                     ) {
                         recommendationList =
                             data.results;
                     } else if (
                         data &&
-                        Array.isArray(data.data)
+                        Array.isArray(
+                            data.data
+                        )
                     ) {
                         recommendationList =
                             data.data;
@@ -670,22 +736,26 @@ const StudentDashboard = ({
                     setRecommendations([]);
                 });
 
-            /* ---------- Closing Soon Scholarships ---------- */
+            /* ---------- Closing Soon ---------- */
 
             fetch(
                 "http://127.0.0.1:8000/api/scholarships/",
                 {
                     headers: {
-                        Authorization: `Token ${token}`,
+                        Authorization:
+                            `Token ${token}`,
                         "Content-Type":
                             "application/json",
                     },
                 }
             )
-                .then((response) => response.json())
+                .then((response) =>
+                    response.json()
+                )
                 .then((data) => {
                     if (Array.isArray(data)) {
-                        const today = new Date();
+                        const today =
+                            new Date();
 
                         today.setHours(
                             0,
@@ -698,44 +768,48 @@ const StudentDashboard = ({
                             new Date(today);
 
                         thirtyDaysOut.setDate(
-                            thirtyDaysOut.getDate() + 30
+                            thirtyDaysOut.getDate() +
+                                30
                         );
 
                         const closingSoon =
-                            data.filter((item) => {
-                                if (
-                                    !item ||
-                                    !item.deadline
-                                ) {
-                                    return false;
-                                }
+                            data.filter(
+                                (item) => {
+                                    if (
+                                        !item ||
+                                        !item.deadline
+                                    ) {
+                                        return false;
+                                    }
 
-                                const deadlineDate =
-                                    new Date(
-                                        item.deadline
+                                    const deadlineDate =
+                                        new Date(
+                                            item.deadline
+                                        );
+
+                                    if (
+                                        isNaN(
+                                            deadlineDate.getTime()
+                                        )
+                                    ) {
+                                        return false;
+                                    }
+
+                                    deadlineDate.setHours(
+                                        0,
+                                        0,
+                                        0,
+                                        0
                                     );
 
-                                if (
-                                    isNaN(
-                                        deadlineDate.getTime()
-                                    )
-                                ) {
-                                    return false;
+                                    return (
+                                        deadlineDate >=
+                                            today &&
+                                        deadlineDate <=
+                                            thirtyDaysOut
+                                    );
                                 }
-
-                                deadlineDate.setHours(
-                                    0,
-                                    0,
-                                    0,
-                                    0
-                                );
-
-                                return (
-                                    deadlineDate >= today &&
-                                    deadlineDate <=
-                                        thirtyDaysOut
-                                );
-                            }).length;
+                            ).length;
 
                         setClosingSoonCount(
                             closingSoon
@@ -751,13 +825,34 @@ const StudentDashboard = ({
         }
     }, []);
 
-    /* ---------- Logout ---------- */
+    /* =====================================================
+       LOGOUT FUNCTIONS
+       ===================================================== */
 
-    const handleLogout = () => {
+    const handleLogout = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault();
+        event.stopPropagation();
+
         setShowLogoutModal(true);
     };
 
-    const confirmLogout = () => {
+    const cancelLogout = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        setShowLogoutModal(false);
+    };
+
+    const confirmLogout = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault();
+        event.stopPropagation();
+
         localStorage.removeItem(
             "scholarbridge_token"
         );
@@ -766,19 +861,20 @@ const StudentDashboard = ({
             "scholarbridge_user"
         );
 
+        sessionStorage.clear();
+
         setShowLogoutModal(false);
 
-        window.location.reload();
-    };
-
-    const cancelLogout = () => {
-        setShowLogoutModal(false);
+        /*
+         * Go back to application starting page
+         */
+        window.location.href = "/";
     };
 
     return (
         <div className="sb-app">
 
-            {/* Sidebar */}
+            {/* ================= SIDEBAR ================= */}
 
             <aside className="sb-sidebar">
 
@@ -856,6 +952,7 @@ const StudentDashboard = ({
                                 ) {
                                     onMyProfile?.();
                                 }
+
                             }}
                         >
 
@@ -874,7 +971,8 @@ const StudentDashboard = ({
                             )}
 
                             {item.dot &&
-                                notificationsCount > 0 && (
+                                notificationsCount >
+                                    0 && (
                                     <span className="sb-nav-dot" />
                                 )}
 
@@ -903,7 +1001,9 @@ const StudentDashboard = ({
                     <button
                         className="sb-promo-btn"
                         type="button"
-                        onClick={onFindScholarships}
+                        onClick={
+                            onFindScholarships
+                        }
                     >
                         Explore All Matches
                     </button>
@@ -924,10 +1024,13 @@ const StudentDashboard = ({
 
                     </div>
 
+                    {/* ================= SIGN OUT ================= */}
+
                     <button
                         className="sb-logout"
                         type="button"
                         onClick={handleLogout}
+                        aria-label="Sign Out"
                     >
 
                         <IconLogout />
@@ -942,11 +1045,11 @@ const StudentDashboard = ({
 
             </aside>
 
-            {/* Main */}
+            {/* ================= MAIN ================= */}
 
             <div className="sb-main">
 
-                {/* Top header */}
+                {/* ---------- Top Header ---------- */}
 
                 <header className="sb-topbar">
 
@@ -973,7 +1076,9 @@ const StudentDashboard = ({
                             className="sb-icon-btn"
                             type="button"
                             aria-label="Search"
-                            onClick={onFindScholarships}
+                            onClick={
+                                onFindScholarships
+                            }
                         >
                             <IconSearch />
                         </button>
@@ -992,12 +1097,15 @@ const StudentDashboard = ({
                             className="sb-icon-btn"
                             type="button"
                             aria-label="Notifications"
-                            onClick={onNotifications}
+                            onClick={
+                                onNotifications
+                            }
                         >
 
                             <IconBell />
 
-                            {notificationsCount > 0 && (
+                            {notificationsCount >
+                                0 && (
                                 <span className="sb-icon-dot" />
                             )}
 
@@ -1005,15 +1113,20 @@ const StudentDashboard = ({
 
                         <div
                             className="sb-user-chip"
-                            onClick={onMyProfile}
+                            onClick={
+                                onMyProfile
+                            }
                             role="button"
                             tabIndex={0}
                             title="Open My Profile"
-                            onKeyDown={(event) => {
+                            onKeyDown={(
+                                event
+                            ) => {
                                 if (
                                     event.key ===
                                         "Enter" ||
-                                    event.key === " "
+                                    event.key ===
+                                        " "
                                 ) {
                                     onMyProfile?.();
                                 }
@@ -1049,7 +1162,7 @@ const StudentDashboard = ({
 
                 <div className="sb-content">
 
-                    {/* Welcome hero */}
+                    {/* ================= HERO ================= */}
 
                     <section className="sb-hero">
 
@@ -1060,7 +1173,9 @@ const StudentDashboard = ({
                             </span>
 
                             <h1>
-                                Welcome back, {studentName}!{" "}
+                                Welcome back,{" "}
+                                {studentName}!
+                                {" "}
                                 <span className="sb-hero-wave">
                                     👋
                                 </span>
@@ -1082,11 +1197,8 @@ const StudentDashboard = ({
                                         onFindScholarships
                                     }
                                 >
-
                                     <IconSearch />
-
                                     Find Scholarships
-
                                 </button>
 
                                 <button
@@ -1096,15 +1208,13 @@ const StudentDashboard = ({
                                         onAIRecommendations
                                     }
                                 >
-
                                     <IconSpark />
 
                                     AI Recommendations{" "}
 
                                     <span className="sb-pill">
-                                        13 New
+                                        {aiMatchesCount} New
                                     </span>
-
                                 </button>
 
                             </div>
@@ -1121,31 +1231,78 @@ const StudentDashboard = ({
 
                     </section>
 
-                    {/* Two column layout */}
+                    {/* ================= TWO COLUMN ================= */}
 
                     <div className="sb-layout">
 
                         <div className="sb-left-col">
 
-                            {/* Stat cards */}
+                            {/* ---------- Stat Cards ---------- */}
 
                             <section className="sb-stats-grid">
 
-                                {statCards.map((card) => (
+                                {statCards.map(
+                                    (card) => (
 
                                     <div
-                                        className={`sb-stat-card accent-${card.accent}`}
-                                        key={card.label}
+                                        className={`sb-stat-card accent-${card.accent}${
+                                            card.label ===
+                                            "AI Matches"
+                                                ? " sb-clickable"
+                                                : ""
+                                        }`}
+                                        key={
+                                            card.label
+                                        }
+                                        role={
+                                            card.label ===
+                                            "AI Matches"
+                                                ? "button"
+                                                : undefined
+                                        }
+                                        tabIndex={
+                                            card.label ===
+                                            "AI Matches"
+                                                ? 0
+                                                : undefined
+                                        }
+                                        onClick={
+                                            card.label ===
+                                            "AI Matches"
+                                                ? onAIRecommendations
+                                                : undefined
+                                        }
+                                        onKeyDown={(
+                                            event
+                                        ) => {
+                                            if (
+                                                card.label ===
+                                                    "AI Matches" &&
+                                                (
+                                                    event.key ===
+                                                        "Enter" ||
+                                                    event.key ===
+                                                        " "
+                                                )
+                                            ) {
+                                                onAIRecommendations?.();
+                                            }
+                                        }}
                                     >
 
                                         <div className="sb-stat-top">
 
                                             <span className="sb-stat-icon">
-                                                {card.icon}
+                                                {
+                                                    card.icon
+                                                }
                                             </span>
 
                                             <span className="sb-stat-trend">
-                                                {card.trend}
+                                                {card.label ===
+                                                "AI Matches"
+                                                    ? `${aiMatchesCount} matches`
+                                                    : card.trend}
                                             </span>
 
                                         </div>
@@ -1173,7 +1330,12 @@ const StudentDashboard = ({
                                         </div>
 
                                         <div className="sb-stat-sub">
-                                            {card.sub}
+
+                                            {card.label ===
+                                            "AI Matches"
+                                                ? "View your personalized AI scholarship recommendations"
+                                                : card.sub}
+
                                         </div>
 
                                     </div>
@@ -1182,7 +1344,7 @@ const StudentDashboard = ({
 
                             </section>
 
-                            {/* Recommended */}
+                            {/* ---------- Recommended ---------- */}
 
                             <section className="sb-panel">
 
@@ -1218,7 +1380,9 @@ const StudentDashboard = ({
                                     >
 
                                         View All (
-                                        {recommendations.length}
+                                        {
+                                            recommendations.length
+                                        }
                                         )
 
                                         <IconArrowRight />
@@ -1233,18 +1397,24 @@ const StudentDashboard = ({
                                         `All Matches (${recommendations.length})`,
                                         ...filterTabs,
                                     ].map(
-                                        (tab, i) => (
+                                        (
+                                            tab,
+                                            i
+                                        ) => (
 
                                             <button
                                                 key={tab}
                                                 className={`sb-filter-tab${
-                                                    i === 0
+                                                    i ===
+                                                    0
                                                         ? " active"
                                                         : ""
                                                 }`}
                                                 type="button"
                                             >
-                                                {tab}
+                                                {
+                                                    tab
+                                                }
                                             </button>
 
                                         )
@@ -1313,12 +1483,16 @@ const StudentDashboard = ({
                                                     </p>
                                                 )}
 
-                                                {recommendations[0]
-                                                    .tags && (
+                                                {Array.isArray(
+                                                    recommendations[0]
+                                                        .tags
+                                                ) && (
                                                     <div className="sb-scholarship-tags">
 
                                                         {recommendations[0].tags.map(
-                                                            (tag) => (
+                                                            (
+                                                                tag
+                                                            ) => (
 
                                                                 <span
                                                                     className="sb-tag"
@@ -1326,7 +1500,9 @@ const StudentDashboard = ({
                                                                         tag
                                                                     }
                                                                 >
-                                                                    {tag}
+                                                                    {
+                                                                        tag
+                                                                    }
                                                                 </span>
 
                                                             )
@@ -1382,9 +1558,9 @@ const StudentDashboard = ({
 
                         </div>
 
-                        <div className="sb-right-col">
+                        {/* ================= RIGHT COLUMN ================= */}
 
-                            {/* Profile strength */}
+                        <div className="sb-right-col">
 
                             <section className="sb-panel sb-profile-panel">
 
@@ -1399,12 +1575,9 @@ const StudentDashboard = ({
                                 </div>
 
                                 <p className="sb-profile-sub">
-
-                                    Complete remaining sections
-                                    to unlock top-tier
-                                    institutional grant
-                                    matches.
-
+                                    Your profile is complete and
+                                    ready for personalized
+                                    scholarship matching.
                                 </p>
 
                                 <div className="sb-progress-row">
@@ -1414,14 +1587,14 @@ const StudentDashboard = ({
                                         <div
                                             className="sb-progress-fill"
                                             style={{
-                                                width: "85%",
+                                                width: `${profileStrength}%`,
                                             }}
                                         />
 
                                     </div>
 
                                     <span className="sb-progress-value">
-                                        85%
+                                        {profileStrength}%
                                     </span>
 
                                 </div>
@@ -1429,11 +1602,15 @@ const StudentDashboard = ({
                                 <ul className="sb-checklist">
 
                                     {profileChecklist.map(
-                                        (item) => (
+                                        (
+                                            item
+                                        ) => (
 
                                             <li
                                                 className="sb-checklist-item"
-                                                key={item.label}
+                                                key={
+                                                    item.label
+                                                }
                                             >
 
                                                 <span
@@ -1453,7 +1630,9 @@ const StudentDashboard = ({
                                                 </span>
 
                                                 <span className="sb-check-label">
-                                                    {item.label}
+                                                    {
+                                                        item.label
+                                                    }
                                                 </span>
 
                                                 <span
@@ -1463,7 +1642,9 @@ const StudentDashboard = ({
                                                             : " pending"
                                                     }`}
                                                 >
-                                                    {item.status}
+                                                    {
+                                                        item.status
+                                                    }
                                                 </span>
 
                                             </li>
@@ -1476,9 +1657,11 @@ const StudentDashboard = ({
                                 <button
                                     className="sb-complete-btn"
                                     type="button"
-                                    onClick={onMyProfile}
+                                    onClick={
+                                        onMyProfile
+                                    }
                                 >
-                                    Complete Profile
+                                    View Profile
                                     <IconArrowRight />
                                 </button>
 
@@ -1488,7 +1671,7 @@ const StudentDashboard = ({
 
                     </div>
 
-                    {/* Upcoming deadlines */}
+                    {/* ================= DEADLINES ================= */}
 
                     <section className="sb-panel sb-deadlines-panel">
 
@@ -1514,7 +1697,8 @@ const StudentDashboard = ({
 
                         <ul className="sb-deadline-list">
 
-                            {deadlines.map((d) => (
+                            {deadlines.map(
+                                (d) => (
 
                                 <li
                                     className={`sb-deadline-item${
@@ -1522,7 +1706,9 @@ const StudentDashboard = ({
                                             ? " urgent"
                                             : ""
                                     }`}
-                                    key={d.title}
+                                    key={
+                                        d.title
+                                    }
                                 >
 
                                     <div className="sb-deadline-info">
@@ -1530,19 +1716,25 @@ const StudentDashboard = ({
                                         <div className="sb-deadline-title-row">
 
                                             <span className="sb-deadline-title">
-                                                {d.title}
+                                                {
+                                                    d.title
+                                                }
                                             </span>
 
                                             {d.urgent && (
                                                 <span className="sb-deadline-flag">
-                                                    {d.days}
+                                                    {
+                                                        d.days
+                                                    }
                                                 </span>
                                             )}
 
                                         </div>
 
                                         <span className="sb-deadline-detail">
-                                            {d.detail}
+                                            {
+                                                d.detail
+                                            }
                                         </span>
 
                                     </div>
@@ -1550,13 +1742,18 @@ const StudentDashboard = ({
                                     <div className="sb-deadline-right">
 
                                         <span className="sb-deadline-closes">
-                                            Closes: {d.closes}
+                                            Closes:{" "}
+                                            {
+                                                d.closes
+                                            }
                                         </span>
 
                                         {!d.urgent &&
                                             d.days && (
                                                 <span className="sb-deadline-days">
-                                                    {d.days}
+                                                    {
+                                                        d.days
+                                                    }
                                                 </span>
                                             )}
 
@@ -1574,13 +1771,29 @@ const StudentDashboard = ({
 
             </div>
 
-            {/* Logout Confirmation Modal */}
+            {/* =====================================================
+                SIGN OUT CONFIRMATION POPUP
+                ===================================================== */}
 
             {showLogoutModal && (
+
                 <div
                     className="sb-logout-overlay"
-                    onClick={cancelLogout}
+                    role="presentation"
+                    onClick={(event) => {
+
+                        if (
+                            event.target ===
+                            event.currentTarget
+                        ) {
+                            setShowLogoutModal(
+                                false
+                            );
+                        }
+
+                    }}
                 >
+
                     <div
                         className="sb-logout-modal"
                         role="dialog"
@@ -1590,43 +1803,69 @@ const StudentDashboard = ({
                             event.stopPropagation()
                         }
                     >
+
+                        {/* Logout Icon */}
+
                         <div className="sb-logout-icon">
+
                             <IconLogout />
+
                         </div>
 
+                        {/* Title */}
+
                         <h3 id="logout-modal-title">
-                            Are you sure you want to exit?
+                            Are you sure you want to sign out?
                         </h3>
 
+                        {/* Description */}
+
                         <p>
-                            You will be logged out of your
+                            You will be signed out of your
                             ScholarBridge AI student account.
                         </p>
+
+                        {/* Buttons */}
 
                         <div className="sb-logout-actions">
 
                             <button
                                 type="button"
                                 className="sb-logout-cancel"
-                                onClick={cancelLogout}
+                                onClick={
+                                    cancelLogout
+                                }
                             >
-                                Cancel
+                                <span>
+                                    Cancel
+                                </span>
                             </button>
 
                             <button
                                 type="button"
                                 className="sb-logout-confirm"
-                                onClick={confirmLogout}
+                                onClick={
+                                    confirmLogout
+                                }
                             >
-                                Logout
+                                <span>
+                                    <IconLogout />
+                                </span>
+
+                                <span>
+                                    Sign Out
+                                </span>
                             </button>
 
                         </div>
+
                     </div>
+
                 </div>
+
             )}
 
-            {/* Floating assistant */}
+            {/* ================= FLOATING ASSISTANT ================= */}
 
             <button
                 className="sb-fab"

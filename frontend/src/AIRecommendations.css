@@ -1,404 +1,631 @@
+/* =========================================================
+   AIRecommendations.css
+   Professional / Modern styling for AIRecommendations.tsx
+   Scoped under .ai-recommendations-page
+========================================================= */
+
 .ai-recommendations-page {
-    min-height: 100vh;
-    background: #f8fafc;
-    padding: 40px 6%;
-    color: #0f172a;
+  --ar-navy: #0f1f3d;
+  --ar-navy-light: #1e3a5f;
+  --ar-blue: #2563eb;
+  --ar-blue-dark: #1d4ed8;
+  --ar-indigo: #4f46e5;
+  --ar-indigo-light: #eef2ff;
+  --ar-purple: #7c3aed;
+
+  --ar-green: #16a34a;
+  --ar-green-bg: #ecfdf3;
+  --ar-orange: #ea580c;
+  --ar-orange-bg: #fff7ed;
+  --ar-red: #dc2626;
+  --ar-red-bg: #fef2f2;
+
+  --ar-text-primary: #0f172a;
+  --ar-text-secondary: #475569;
+  --ar-text-muted: #94a3b8;
+
+  --ar-bg: #f6f8fb;
+  --ar-white: #ffffff;
+  --ar-border: #e2e8f0;
+  --ar-border-strong: #cbd5e1;
+
+  --ar-radius-sm: 8px;
+  --ar-radius-md: 12px;
+  --ar-radius-lg: 16px;
+  --ar-radius-full: 999px;
+
+  --ar-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --ar-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --ar-shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.12);
+
+  --ar-space-xs: 4px;
+  --ar-space-sm: 8px;
+  --ar-space-md: 16px;
+  --ar-space-lg: 24px;
+  --ar-space-xl: 32px;
+
+  --ar-transition: 180ms ease;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--ar-bg);
+  padding: var(--ar-space-xl) clamp(16px, 4vw, 48px);
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont,
+    Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ar-text-primary);
 }
 
-/* Header */
+.ai-recommendations-page *,
+.ai-recommendations-page *::before,
+.ai-recommendations-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .ai-recommendations-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
-    margin-bottom: 35px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ar-space-lg);
+  flex-wrap: wrap;
+  margin-bottom: var(--ar-space-xl);
 }
 
 .ai-recommendations-heading {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ar-space-md);
+  min-width: 0;
 }
 
 .ai-recommendations-icon {
-    width: 58px;
-    height: 58px;
-    border-radius: 16px;
-    background: linear-gradient(135deg,
-            #2563eb,
-            #7c3aed);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    flex-shrink: 0;
-    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--ar-radius-md);
+  background: linear-gradient(135deg, var(--ar-purple), var(--ar-blue));
+  font-size: 26px;
+  box-shadow: var(--ar-shadow-md);
 }
 
 .ai-recommendations-label {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: #2563eb;
-    margin-bottom: 8px;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ar-blue-dark);
+  background: var(--ar-indigo-light);
+  padding: 4px 10px;
+  border-radius: var(--ar-radius-full);
+  margin-bottom: var(--ar-space-sm);
 }
 
 .ai-recommendations-title {
-    margin: 0;
-    font-size: 34px;
-    font-weight: 800;
-    line-height: 1.2;
-    background: linear-gradient(90deg,
-            #2563eb,
-            #7c3aed);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  margin: 0 0 6px 0;
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 700;
+  color: var(--ar-navy);
+  line-height: 1.25;
+  word-break: break-word;
 }
 
 .ai-recommendations-subtitle {
-    margin: 10px 0 0;
-    color: #64748b;
-    font-size: 15px;
-    line-height: 1.6;
+  margin: 0;
+  max-width: 560px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ar-text-secondary);
 }
 
-/* Back Button */
-
 .back-dashboard-btn {
-    border: none;
-    background: white;
-    color: #334155;
-    padding: 12px 18px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
-    transition: 0.2s ease;
-    white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ar-navy);
+  background: var(--ar-white);
+  border: 1px solid var(--ar-border-strong);
+  border-radius: var(--ar-radius-sm);
+  cursor: pointer;
+  transition: background var(--ar-transition), border-color var(--ar-transition),
+    transform var(--ar-transition), box-shadow var(--ar-transition);
+  white-space: nowrap;
 }
 
 .back-dashboard-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 20px rgba(15, 23, 42, 0.12);
+  background: var(--ar-bg);
+  border-color: var(--ar-blue);
+  color: var(--ar-blue-dark);
+  box-shadow: var(--ar-shadow-sm);
 }
 
-/* Loading */
+.back-dashboard-btn:focus-visible {
+  outline: 2px solid var(--ar-blue);
+  outline-offset: 2px;
+}
+
+.back-dashboard-btn:active {
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   LOADING STATE
+========================================================= */
 
 .recommendation-loading {
-    min-height: 300px;
-    background: white;
-    border-radius: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-    color: #64748b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ar-space-md);
+  padding: 72px var(--ar-space-lg);
+  background: var(--ar-white);
+  border: 1px solid var(--ar-border);
+  border-radius: var(--ar-radius-lg);
+  text-align: center;
+}
+
+.recommendation-loading p {
+  margin: 0;
+  max-width: 380px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ar-text-secondary);
 }
 
 .recommendation-spinner {
-    width: 42px;
-    height: 42px;
-    border: 4px solid #dbeafe;
-    border-top-color: #2563eb;
-    border-radius: 50%;
-    animation: recommendation-spin 0.8s linear infinite;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--ar-border);
+  border-top-color: var(--ar-purple);
+  animation: ar-spin 0.8s linear infinite;
 }
 
-@keyframes recommendation-spin {
-    to {
-        transform: rotate(360deg);
-    }
+@keyframes ar-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* Error */
+/* =========================================================
+   ERROR STATE
+========================================================= */
 
 .recommendation-error {
-    background: #fff7ed;
-    border: 1px solid #fed7aa;
-    color: #9a3412;
-    border-radius: 14px;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px 18px;
+  margin-bottom: var(--ar-space-lg);
+  background: var(--ar-red-bg);
+  border: 1px solid #fecaca;
+  border-radius: var(--ar-radius-md);
+  color: #991b1b;
+}
+
+.recommendation-error span {
+  flex-shrink: 0;
+  font-size: 17px;
+  line-height: 1.4;
 }
 
 .recommendation-error p {
-    margin: 0;
-    font-size: 14px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
-/* Summary */
-
-.recommendation-summary {
-    background: white;
-    border-radius: 18px;
-    padding: 22px 26px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-}
-
-.recommendation-summary>div {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.recommendation-summary span {
-    font-size: 12px;
-    font-weight: 700;
-    color: #64748b;
-    letter-spacing: 1px;
-}
-
-.recommendation-summary strong {
-    font-size: 26px;
-    color: #2563eb;
-}
-
-.recommendation-summary p {
-    margin: 0;
-    color: #64748b;
-    font-size: 14px;
-}
-
-/* Grid */
-
-.recommendation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,
-            minmax(320px, 1fr));
-    gap: 24px;
-}
-
-/* Card */
-
-.recommendation-card {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-    transition: 0.25s ease;
-}
-
-.recommendation-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1);
-    border-color: #c7d2fe;
-}
-
-.recommendation-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.recommendation-card-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
-    background: #eff6ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 25px;
-}
-
-.match-score {
-    min-width: 72px;
-    padding: 8px 12px;
-    border-radius: 12px;
-    background: #ecfdf5;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.match-score strong {
-    font-size: 20px;
-    color: #059669;
-    line-height: 1.2;
-}
-
-.match-score span {
-    font-size: 11px;
-    color: #047857;
-    font-weight: 600;
-}
-
-/* Scholarship title */
-
-.recommendation-card h2 {
-    margin: 0 0 20px;
-    font-size: 21px;
-    line-height: 1.35;
-    color: #0f172a;
-}
-
-/* Information */
-
-.recommendation-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.recommendation-info-item {
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.recommendation-info-item span {
-    font-size: 12px;
-    color: #64748b;
-}
-
-.recommendation-info-item strong {
-    font-size: 14px;
-    color: #334155;
-}
-
-/* Reason */
-
-.recommendation-reason {
-    border-left: 4px solid #6366f1;
-    background: #f5f3ff;
-    border-radius: 0 12px 12px 0;
-    padding: 14px 16px;
-}
-
-.recommendation-reason>span {
-    font-size: 13px;
-    font-weight: 700;
-    color: #5b21b6;
-}
-
-.recommendation-reason p {
-    margin: 8px 0 0;
-    font-size: 13px;
-    line-height: 1.6;
-    color: #64748b;
-}
-
-/* Empty */
+/* =========================================================
+   EMPTY STATE
+========================================================= */
 
 .recommendation-empty {
-    background: white;
-    border-radius: 18px;
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px;
-    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  padding: 72px var(--ar-space-lg);
+  background: var(--ar-white);
+  border: 1px dashed var(--ar-border-strong);
+  border-radius: var(--ar-radius-lg);
 }
 
 .empty-recommendation-icon {
-    width: 75px;
-    height: 75px;
-    border-radius: 20px;
-    background: #eff6ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 34px;
-    margin-bottom: 18px;
+  font-size: 40px;
+  margin-bottom: var(--ar-space-sm);
+  opacity: 0.85;
 }
 
 .recommendation-empty h2 {
-    margin: 0 0 8px;
-    color: #0f172a;
+  margin: 0 0 4px 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ar-navy);
 }
 
 .recommendation-empty p {
-    margin: 0;
-    max-width: 450px;
-    color: #64748b;
-    line-height: 1.6;
+  margin: 0;
+  max-width: 380px;
+  font-size: 14px;
+  color: var(--ar-text-secondary);
+  line-height: 1.5;
 }
 
-/* Tablet */
+/* =========================================================
+   RECOMMENDATION CONTENT / SUMMARY
+========================================================= */
 
-@media (max-width: 900px) {
-    .ai-recommendations-page {
-        padding: 30px 4%;
-    }
-
-    .ai-recommendations-header {
-        flex-direction: column;
-    }
-
-    .back-dashboard-btn {
-        align-self: flex-start;
-    }
-
-    .ai-recommendations-title {
-        font-size: 28px;
-    }
-
-    .recommendation-summary {
-        align-items: flex-start;
-        flex-direction: column;
-    }
+.recommendation-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ar-space-lg);
 }
 
-/* Mobile */
+.recommendation-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ar-space-md);
+  flex-wrap: wrap;
+  padding: var(--ar-space-md) var(--ar-space-lg);
+  background: var(--ar-white);
+  border: 1px solid var(--ar-border);
+  border-radius: var(--ar-radius-md);
+  box-shadow: var(--ar-shadow-sm);
+}
 
-@media (max-width: 600px) {
-    .ai-recommendations-page {
-        padding: 22px 16px;
-    }
+.recommendation-summary > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
 
-    .ai-recommendations-heading {
-        gap: 12px;
-    }
+.recommendation-summary > div:first-child span {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ar-text-muted);
+}
 
-    .ai-recommendations-icon {
-        width: 48px;
-        height: 48px;
-        font-size: 23px;
-        border-radius: 13px;
-    }
+.recommendation-summary > div:first-child strong {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ar-indigo);
+  line-height: 1;
+}
 
-    .ai-recommendations-title {
-        font-size: 23px;
-    }
+.recommendation-summary > p {
+  margin: 0;
+  flex: 1;
+  min-width: 220px;
+  font-size: 13.5px;
+  color: var(--ar-text-secondary);
+  line-height: 1.5;
+  text-align: right;
+}
 
-    .ai-recommendations-subtitle {
-        font-size: 13px;
-    }
+/* =========================================================
+   RECOMMENDATION GRID
+========================================================= */
 
-    .recommendation-grid {
-        grid-template-columns: 1fr;
-    }
+.recommendation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--ar-space-lg);
+  align-items: stretch;
+}
 
-    .recommendation-card {
-        padding: 20px;
-    }
+/* =========================================================
+   RECOMMENDATION CARD
+========================================================= */
 
-    .recommendation-info {
-        grid-template-columns: 1fr;
-    }
+.recommendation-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--ar-white);
+  border: 1px solid var(--ar-border);
+  border-radius: var(--ar-radius-lg);
+  padding: var(--ar-space-lg);
+  box-shadow: var(--ar-shadow-sm);
+  transition: box-shadow var(--ar-transition), border-color var(--ar-transition),
+    transform var(--ar-transition);
+}
 
-    .recommendation-summary {
-        padding: 18px;
-    }
+.recommendation-card:hover {
+  box-shadow: var(--ar-shadow-lg);
+  border-color: var(--ar-border-strong);
+  transform: translateY(-2px);
+}
+
+.recommendation-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ar-space-sm);
+  margin-bottom: var(--ar-space-md);
+}
+
+.recommendation-card-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ar-radius-sm);
+  background: var(--ar-indigo-light);
+  font-size: 19px;
+}
+
+/* Scholarship title (plain h2 inside the card) */
+.recommendation-card h2 {
+  margin: 0 0 var(--ar-space-md) 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ar-navy);
+  line-height: 1.35;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   MATCH SCORE BADGE
+========================================================= */
+
+.match-score {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  padding: 6px 12px;
+  border-radius: var(--ar-radius-md);
+  background: var(--ar-green-bg);
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.match-score strong {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--ar-green);
+}
+
+.match-score span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ar-text-muted);
+}
+
+/* Medium / lower match visual states (applied via inline logic if added later;
+   kept as attribute-based fallbacks using data attributes for forward compatibility) */
+.match-score[data-level="medium"] {
+  background: var(--ar-orange-bg);
+  border-color: rgba(234, 88, 12, 0.25);
+}
+
+.match-score[data-level="medium"] strong {
+  color: var(--ar-orange);
+}
+
+.match-score[data-level="low"] {
+  background: #f1f5f9;
+  border-color: var(--ar-border-strong);
+}
+
+.match-score[data-level="low"] strong {
+  color: var(--ar-text-secondary);
+}
+
+/* =========================================================
+   RECOMMENDATION INFO ROWS
+========================================================= */
+
+.recommendation-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--ar-space-md) 0;
+  margin-bottom: var(--ar-space-md);
+  border-top: 1px solid var(--ar-border);
+  border-bottom: 1px solid var(--ar-border);
+}
+
+.recommendation-info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ar-space-sm);
+  min-width: 0;
+}
+
+.recommendation-info-item span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ar-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recommendation-info-item strong {
+  flex-shrink: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ar-navy);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 55%;
+}
+
+/* =========================================================
+   RECOMMENDATION REASON ("Why this matches you")
+========================================================= */
+
+.recommendation-reason {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  background: var(--ar-indigo-light);
+  border: 1px solid rgba(79, 70, 229, 0.15);
+  border-radius: var(--ar-radius-sm);
+}
+
+.recommendation-reason span {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ar-indigo);
+  letter-spacing: 0.01em;
+}
+
+.recommendation-reason p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ar-text-secondary);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   RESPONSIVE — LAPTOP / TABLET LANDSCAPE
+========================================================= */
+
+@media (max-width: 1024px) {
+  .ai-recommendations-page {
+    padding: var(--ar-space-lg) clamp(14px, 3vw, 32px);
+  }
+
+  .recommendation-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .ai-recommendations-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .back-dashboard-btn {
+    align-self: flex-start;
+  }
+
+  .recommendation-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .recommendation-summary > p {
+    text-align: left;
+    min-width: 0;
+  }
+
+  .recommendation-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--ar-space-md);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+  .ai-recommendations-page {
+    padding: var(--ar-space-md) 14px;
+  }
+
+  .ai-recommendations-heading {
+    gap: 12px;
+  }
+
+  .ai-recommendations-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 21px;
+  }
+
+  .ai-recommendations-title {
+    font-size: 20px;
+  }
+
+  .ai-recommendations-subtitle {
+    font-size: 13.5px;
+  }
+
+  .back-dashboard-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .recommendation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recommendation-card {
+    padding: var(--ar-space-md);
+  }
+
+  .recommendation-info-item strong {
+    max-width: 50%;
+  }
+
+  .match-score {
+    min-width: 56px;
+    padding: 5px 10px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .ai-recommendations-label {
+    font-size: 10px;
+  }
+
+  .ai-recommendations-title {
+    font-size: 18px;
+  }
+
+  .recommendation-card h2 {
+    font-size: 15.5px;
+  }
+
+  .recommendation-info-item span,
+  .recommendation-info-item strong {
+    font-size: 12.5px;
+  }
+
+  .recommendation-reason p {
+    font-size: 12.5px;
+  }
 }

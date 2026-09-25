@@ -451,7 +451,59 @@ export default function App() {
     }
   };
 
+// =====================================================
+// PROVIDER LOGOUT
+// =====================================================
 
+const handleProviderLogout = (): void => {
+  console.log("Provider logout successful");
+
+  // Remove Provider authentication data
+  localStorage.removeItem("provider_token");
+  localStorage.removeItem("provider_user_id");
+  localStorage.removeItem("provider_email");
+  localStorage.removeItem("provider_role");
+
+  sessionStorage.removeItem("provider_token");
+  sessionStorage.removeItem("provider_user_id");
+  sessionStorage.removeItem("provider_email");
+  sessionStorage.removeItem("provider_role");
+
+  // Close Provider pages
+  setShowProviderDashboard(false);
+  setShowProviderLogin(true);
+
+  setShowProviderRegister(false);
+  setShowProviderForgotPassword(false);
+  setShowProviderCreateScholarship(false);
+  setShowProviderScholarships(false);
+  setShowProviderApplications(false);
+  setShowProviderNotifications(false);
+  setShowProviderProfile(false);
+  setShowProviderHelpSupport(false);
+
+  // Close Student pages
+  setShowStudentLogin(false);
+  setShowStudentRegister(false);
+  setShowStudentForgotPassword(false);
+  setShowStudentDashboard(false);
+
+  setShowFindScholarships(false);
+  setShowScholarshipDetails(false);
+  setShowAIRecommendations(false);
+  setShowMyApplications(false);
+  setShowSavedScholarships(false);
+  setShowNotifications(false);
+  setShowMyDocuments(false);
+  setShowMyProfile(false);
+
+  // Close Admin pages
+  setShowAdminLogin(false);
+  setShowAdminForgotPassword(false);
+  setShowAdminDashboard(false);
+
+  setSelectedScholarshipId(null);
+};
   // =====================================================
   // ADMIN LOGOUT
   // =====================================================

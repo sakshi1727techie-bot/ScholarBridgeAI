@@ -1,8 +1,73 @@
+/* =========================================================
+   MyApplications.css
+   Professional / Modern styling for MyApplications.tsx
+   Scoped under .my-applications-page
+========================================================= */
+
 .my-applications-page {
-    min-height: 100vh;
-    background: #f8fafc;
-    padding: 40px 6%;
-    color: #0f172a;
+  --ma-navy: #0f1f3d;
+  --ma-navy-light: #1e3a5f;
+  --ma-blue: #2563eb;
+  --ma-blue-dark: #1d4ed8;
+  --ma-indigo: #4f46e5;
+  --ma-indigo-light: #eef2ff;
+
+  --ma-green: #16a34a;
+  --ma-green-bg: #ecfdf3;
+  --ma-green-border: rgba(22, 163, 74, 0.22);
+
+  --ma-red: #dc2626;
+  --ma-red-bg: #fef2f2;
+  --ma-red-border: rgba(220, 38, 38, 0.2);
+
+  --ma-orange: #b45309;
+  --ma-orange-bg: #fffbeb;
+  --ma-orange-border: rgba(180, 83, 9, 0.22);
+
+  --ma-blue-status: #1d4ed8;
+  --ma-blue-status-bg: #eff6ff;
+  --ma-blue-status-border: rgba(29, 78, 216, 0.2);
+
+  --ma-text-primary: #0f172a;
+  --ma-text-secondary: #475569;
+  --ma-text-muted: #94a3b8;
+
+  --ma-bg: #f6f8fb;
+  --ma-white: #ffffff;
+  --ma-border: #e2e8f0;
+  --ma-border-strong: #cbd5e1;
+
+  --ma-radius-sm: 8px;
+  --ma-radius-md: 12px;
+  --ma-radius-lg: 16px;
+  --ma-radius-full: 999px;
+
+  --ma-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --ma-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --ma-shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.12);
+
+  --ma-space-xs: 4px;
+  --ma-space-sm: 8px;
+  --ma-space-md: 16px;
+  --ma-space-lg: 24px;
+  --ma-space-xl: 32px;
+
+  --ma-transition: 180ms ease;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--ma-bg);
+  padding: var(--ma-space-xl) clamp(16px, 4vw, 48px);
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont,
+    Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ma-text-primary);
+}
+
+.my-applications-page *,
+.my-applications-page *::before,
+.my-applications-page *::after {
+  box-sizing: border-box;
 }
 
 /* =========================================================
@@ -10,338 +75,164 @@
 ========================================================= */
 
 .my-applications-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    margin-bottom: 40px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ma-space-lg);
+  flex-wrap: wrap;
+  margin-bottom: var(--ma-space-xl);
 }
 
 .my-applications-heading {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ma-space-md);
+  min-width: 0;
 }
 
 .my-applications-icon {
-    width: 64px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 18px;
-    background: #e0e7ff;
-    font-size: 30px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--ma-radius-md);
+  background: linear-gradient(135deg, var(--ma-indigo), var(--ma-blue));
+  font-size: 26px;
+  box-shadow: var(--ma-shadow-md);
 }
 
 .my-applications-label {
-    display: block;
-    margin-bottom: 6px;
-    color: #4f46e5;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ma-blue-dark);
+  background: var(--ma-indigo-light);
+  padding: 4px 10px;
+  border-radius: var(--ma-radius-full);
+  margin-bottom: var(--ma-space-sm);
 }
 
 .my-applications-title {
-    margin: 0;
-    font-size: 34px;
-    line-height: 1.2;
-    font-weight: 800;
-    color: #0f172a;
+  margin: 0 0 6px 0;
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 700;
+  color: var(--ma-navy);
+  line-height: 1.25;
+  word-break: break-word;
 }
 
 .my-applications-subtitle {
-    margin: 8px 0 0;
-    color: #64748b;
-    font-size: 15px;
+  margin: 0;
+  max-width: 560px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ma-text-secondary);
 }
 
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
 .back-dashboard-btn {
-    border: none;
-    border-radius: 12px;
-    padding: 12px 18px;
-    background: #ffffff;
-    color: #334155;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
-    transition: all 0.2s ease;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ma-navy);
+  background: var(--ma-white);
+  border: 1px solid var(--ma-border-strong);
+  border-radius: var(--ma-radius-sm);
+  cursor: pointer;
+  transition: background var(--ma-transition), border-color var(--ma-transition),
+    transform var(--ma-transition), box-shadow var(--ma-transition);
+  white-space: nowrap;
 }
 
 .back-dashboard-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 20px rgba(15, 23, 42, 0.12);
+  background: var(--ma-bg);
+  border-color: var(--ma-blue);
+  color: var(--ma-blue-dark);
+  box-shadow: var(--ma-shadow-sm);
+}
+
+.back-dashboard-btn:focus-visible {
+  outline: 2px solid var(--ma-blue);
+  outline-offset: 2px;
+}
+
+.back-dashboard-btn:active {
+  transform: translateY(1px);
 }
 
 /* =========================================================
-   SUMMARY
-========================================================= */
-
-.applications-summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-    padding: 22px 25px;
-    margin-bottom: 25px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    box-shadow: 0 6px 25px rgba(15, 23, 42, 0.05);
-}
-
-.applications-summary div {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.applications-summary span {
-    color: #64748b;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.applications-summary strong {
-    font-size: 26px;
-    color: #4f46e5;
-}
-
-.applications-summary p {
-    margin: 0;
-    color: #64748b;
-    font-size: 14px;
-}
-
-/* =========================================================
-   APPLICATION GRID
-========================================================= */
-
-.applications-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
-}
-
-/* =========================================================
-   APPLICATION CARD
-========================================================= */
-
-.application-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
-    transition: all 0.25s ease;
-}
-
-.application-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.10);
-}
-
-.application-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.application-card-icon {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 14px;
-    background: #eef2ff;
-    font-size: 24px;
-}
-
-.application-card h2 {
-    margin: 0 0 18px;
-    color: #0f172a;
-    font-size: 21px;
-    font-weight: 800;
-    line-height: 1.35;
-}
-
-/* =========================================================
-   PROVIDER
-========================================================= */
-
-.application-provider {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    padding: 14px 0;
-    border-top: 1px solid #f1f5f9;
-    border-bottom: 1px solid #f1f5f9;
-}
-
-.application-provider span {
-    color: #64748b;
-    font-size: 13px;
-}
-
-.application-provider strong {
-    color: #334155;
-    font-size: 14px;
-}
-
-/* =========================================================
-   APPLICATION INFO
-========================================================= */
-
-.application-info {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.application-info-item {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 13px;
-    background: #f8fafc;
-    border-radius: 12px;
-}
-
-.application-info-item span {
-    color: #64748b;
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.application-info-item strong {
-    color: #0f172a;
-    font-size: 14px;
-}
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-.application-status-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-    padding-top: 18px;
-    border-top: 1px solid #e2e8f0;
-}
-
-.application-status-section > span {
-    color: #64748b;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.application-status {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-/* Pending */
-
-.application-status.pending {
-    background: #fff7ed;
-    color: #c2410c;
-}
-
-/* Under Review */
-
-.application-status.under-review {
-    background: #eff6ff;
-    color: #1d4ed8;
-}
-
-/* Approved */
-
-.application-status.approved {
-    background: #ecfdf5;
-    color: #047857;
-}
-
-/* Rejected */
-
-.application-status.rejected {
-    background: #fef2f2;
-    color: #b91c1c;
-}
-
-/* =========================================================
-   LOADING
+   LOADING STATE
 ========================================================= */
 
 .applications-loading {
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ma-space-md);
+  padding: 72px var(--ma-space-lg);
+  background: var(--ma-white);
+  border: 1px solid var(--ma-border);
+  border-radius: var(--ma-radius-lg);
+  text-align: center;
 }
 
 .applications-loading p {
-    margin: 0;
-    color: #64748b;
-    font-size: 14px;
+  margin: 0;
+  max-width: 380px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ma-text-secondary);
 }
 
 .applications-spinner {
-    width: 42px;
-    height: 42px;
-    border: 4px solid #e2e8f0;
-    border-top-color: #4f46e5;
-    border-radius: 50%;
-    animation: application-spin 0.8s linear infinite;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--ma-border);
+  border-top-color: var(--ma-blue);
+  animation: ma-spin 0.8s linear infinite;
 }
 
-@keyframes application-spin {
-    to {
-        transform: rotate(360deg);
-    }
+@keyframes ma-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* =========================================================
-   ERROR
+   ERROR STATE
 ========================================================= */
 
 .applications-error {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 20px;
-    background: #fef2f2;
-    border: 1px solid #fecaca;
-    border-radius: 15px;
-    color: #b91c1c;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px 18px;
+  margin-bottom: var(--ma-space-lg);
+  background: var(--ma-red-bg);
+  border: 1px solid #fecaca;
+  border-radius: var(--ma-radius-md);
+  color: #991b1b;
+}
+
+.applications-error span {
+  flex-shrink: 0;
+  font-size: 17px;
+  line-height: 1.4;
 }
 
 .applications-error p {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 /* =========================================================
@@ -349,106 +240,427 @@
 ========================================================= */
 
 .applications-empty {
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  padding: 72px var(--ma-space-lg);
+  background: var(--ma-white);
+  border: 1px dashed var(--ma-border-strong);
+  border-radius: var(--ma-radius-lg);
 }
 
 .empty-applications-icon {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-    border-radius: 22px;
-    background: #eef2ff;
-    font-size: 38px;
+  font-size: 40px;
+  margin-bottom: var(--ma-space-sm);
+  opacity: 0.85;
 }
 
 .applications-empty h2 {
-    margin: 0 0 8px;
-    font-size: 24px;
-    color: #0f172a;
+  margin: 0 0 4px 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ma-navy);
 }
 
 .applications-empty p {
-    margin: 0;
-    color: #64748b;
-    font-size: 14px;
+  margin: 0;
+  max-width: 380px;
+  font-size: 14px;
+  color: var(--ma-text-secondary);
+  line-height: 1.5;
 }
 
 /* =========================================================
-   RESPONSIVE
+   APPLICATIONS CONTENT / SUMMARY
 ========================================================= */
 
-@media (max-width: 900px) {
-
-    .applications-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .my-applications-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .back-dashboard-btn {
-        width: 100%;
-    }
+.applications-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ma-space-lg);
 }
 
-@media (max-width: 600px) {
+.applications-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ma-space-md);
+  flex-wrap: wrap;
+  padding: var(--ma-space-md) var(--ma-space-lg);
+  background: var(--ma-white);
+  border: 1px solid var(--ma-border);
+  border-radius: var(--ma-radius-md);
+  box-shadow: var(--ma-shadow-sm);
+}
 
-    .my-applications-page {
-        padding: 25px 16px;
-    }
+.applications-summary > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
 
-    .my-applications-heading {
-        align-items: flex-start;
-    }
+.applications-summary > div:first-child span {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ma-text-muted);
+}
 
-    .my-applications-icon {
-        width: 52px;
-        height: 52px;
-        font-size: 24px;
-    }
+.applications-summary > div:first-child strong {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ma-indigo);
+  line-height: 1;
+}
 
-    .my-applications-title {
-        font-size: 27px;
-    }
+.applications-summary > p {
+  margin: 0;
+  flex: 1;
+  min-width: 220px;
+  font-size: 13.5px;
+  color: var(--ma-text-secondary);
+  line-height: 1.5;
+  text-align: right;
+}
 
-    .my-applications-subtitle {
-        font-size: 13px;
-    }
+/* =========================================================
+   APPLICATIONS GRID
+========================================================= */
 
-    .applications-summary {
-        align-items: flex-start;
-        flex-direction: column;
-    }
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--ma-space-lg);
+  align-items: stretch;
+}
 
-    .applications-info {
-        grid-template-columns: 1fr;
-    }
+/* =========================================================
+   APPLICATION CARD
+========================================================= */
 
-    .application-info {
-        grid-template-columns: 1fr;
-    }
+.application-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--ma-white);
+  border: 1px solid var(--ma-border);
+  border-radius: var(--ma-radius-lg);
+  padding: var(--ma-space-lg);
+  box-shadow: var(--ma-shadow-sm);
+  transition: box-shadow var(--ma-transition), border-color var(--ma-transition),
+    transform var(--ma-transition);
+}
 
-    .application-provider,
-    .application-status-section {
-        align-items: flex-start;
-        flex-direction: column;
-    }
+.application-card:hover {
+  box-shadow: var(--ma-shadow-lg);
+  border-color: var(--ma-border-strong);
+  transform: translateY(-2px);
+}
 
-    .application-card {
-        padding: 20px;
-    }
+.application-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ma-space-sm);
+  margin-bottom: var(--ma-space-md);
+}
+
+.application-card-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ma-radius-sm);
+  background: var(--ma-indigo-light);
+  font-size: 19px;
+}
+
+/* Scholarship title (plain h2 inside the card) */
+.application-card h2 {
+  margin: 0 0 var(--ma-space-md) 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ma-navy);
+  line-height: 1.35;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   STATUS BADGE (shared class applied to span + strong)
+========================================================= */
+
+.application-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  max-width: 60%;
+  padding: 4px 12px;
+  border-radius: var(--ma-radius-full);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: var(--ma-orange-bg);
+  color: var(--ma-orange);
+  border: 1px solid var(--ma-orange-border);
+}
+
+.application-status.approved {
+  background: var(--ma-green-bg);
+  color: var(--ma-green);
+  border-color: var(--ma-green-border);
+}
+
+.application-status.rejected {
+  background: var(--ma-red-bg);
+  color: var(--ma-red);
+  border-color: var(--ma-red-border);
+}
+
+.application-status.under-review {
+  background: var(--ma-blue-status-bg);
+  color: var(--ma-blue-status);
+  border-color: var(--ma-blue-status-border);
+}
+
+.application-status.pending {
+  background: var(--ma-orange-bg);
+  color: var(--ma-orange);
+  border-color: var(--ma-orange-border);
+}
+
+/* =========================================================
+   PROVIDER
+========================================================= */
+
+.application-provider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ma-space-sm);
+  min-width: 0;
+  padding-bottom: var(--ma-space-md);
+  margin-bottom: var(--ma-space-md);
+  border-bottom: 1px solid var(--ma-border);
+}
+
+.application-provider span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ma-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.application-provider strong {
+  flex-shrink: 0;
+  max-width: 55%;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ma-navy);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   APPLICATION INFO ROWS
+========================================================= */
+
+.application-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: var(--ma-space-md);
+  margin-bottom: var(--ma-space-md);
+  border-bottom: 1px solid var(--ma-border);
+}
+
+.application-info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ma-space-sm);
+  min-width: 0;
+}
+
+.application-info-item span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ma-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.application-info-item strong {
+  flex-shrink: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ma-navy);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 55%;
+}
+
+/* =========================================================
+   STATUS SECTION (footer of card)
+========================================================= */
+
+.application-status-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ma-space-sm);
+  margin-top: auto;
+  padding-top: var(--ma-space-md);
+  min-width: 0;
+}
+
+.application-status-section > span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ma-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   RESPONSIVE — LAPTOP / TABLET LANDSCAPE
+========================================================= */
+
+@media (max-width: 1024px) {
+  .my-applications-page {
+    padding: var(--ma-space-lg) clamp(14px, 3vw, 32px);
+  }
+
+  .applications-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .my-applications-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .back-dashboard-btn {
+    align-self: flex-start;
+  }
+
+  .applications-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .applications-summary > p {
+    text-align: left;
+    min-width: 0;
+  }
+
+  .applications-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--ma-space-md);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+  .my-applications-page {
+    padding: var(--ma-space-md) 14px;
+  }
+
+  .my-applications-heading {
+    gap: 12px;
+  }
+
+  .my-applications-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 21px;
+  }
+
+  .my-applications-title {
+    font-size: 20px;
+  }
+
+  .my-applications-subtitle {
+    font-size: 13.5px;
+  }
+
+  .back-dashboard-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .applications-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .application-card {
+    padding: var(--ma-space-md);
+  }
+
+  .application-status {
+    max-width: 50%;
+  }
+
+  .application-provider strong,
+  .application-info-item strong {
+    max-width: 50%;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .my-applications-label {
+    font-size: 10px;
+  }
+
+  .my-applications-title {
+    font-size: 18px;
+  }
+
+  .application-card h2 {
+    font-size: 15.5px;
+  }
+
+  .application-provider span,
+  .application-provider strong,
+  .application-info-item span,
+  .application-info-item strong,
+  .application-status-section > span {
+    font-size: 12.5px;
+  }
+
+  .application-status {
+    font-size: 10.5px;
+    padding: 3px 10px;
+  }
 }
