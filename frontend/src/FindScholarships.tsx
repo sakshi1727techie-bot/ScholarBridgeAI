@@ -57,7 +57,7 @@ const FindScholarships: React.FC<FindScholarshipsProps> = ({
                 setError("");
 
                 const response = await fetch(
-                    "http://127.0.0.1:8000/api/scholarships/"
+                    "https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/"
                 );
 
                 if (!response.ok) {
@@ -100,7 +100,7 @@ const FindScholarships: React.FC<FindScholarshipsProps> = ({
                 }
 
                 const response = await fetch(
-                    "http://127.0.0.1:8000/api/scholarships/saved/",
+                    "https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/saved/",
                     {
                         method: "GET",
                         headers: {
@@ -179,7 +179,7 @@ const FindScholarships: React.FC<FindScholarshipsProps> = ({
                 );
 
             const response = await fetch(
-                `http://127.0.0.1:8000/api/scholarships/${scholarshipId}/${
+                `https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/${scholarshipId}/${
                     isSaved ? "unsave" : "save"
                 }/`,
                 {

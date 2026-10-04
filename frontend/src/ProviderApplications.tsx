@@ -139,7 +139,7 @@ const ProviderApplications: React.FC<
           }
 
           const response = await fetch(
-            "http://127.0.0.1:8000/api/notifications/",
+            "https://scholarbridgeai-1-dkm7.onrender.com/api/notifications/",
             {
               method: "GET",
               headers: {
@@ -201,7 +201,7 @@ const ProviderApplications: React.FC<
         }
 
         const response = await fetch(
-          "http://127.0.0.1:8000/application/api/provider/",
+          "https://scholarbridgeai-1-dkm7.onrender.com/application/api/provider/",
           {
             method: "GET",
             headers: {
@@ -311,7 +311,7 @@ const ProviderApplications: React.FC<
         }
 
         const response = await fetch(
-          `http://127.0.0.1:8000/application/api/provider/${applicationId}/status/`,
+          `https://scholarbridgeai-1-dkm7.onrender.com/application/api/provider/${applicationId}/status/`,
           {
             method: "PATCH",
             headers: {
@@ -390,7 +390,7 @@ const ProviderApplications: React.FC<
 
           const notificationResponse =
             await fetch(
-              "http://127.0.0.1:8000/api/notifications/",
+              "https://scholarbridgeai-1-dkm7.onrender.com/api/notifications/",
               {
                 method: "GET",
                 headers: {

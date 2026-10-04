@@ -121,7 +121,7 @@ const ScholarshipManagement: React.FC<
         }
 
         const response: Response = await fetch(
-          "http://127.0.0.1:8000/api/scholarships/admin/",
+          "https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/admin/",
           {
             method: "GET",
 
@@ -277,7 +277,7 @@ const ScholarshipManagement: React.FC<
       }
 
       const response: Response = await fetch(
-        `http://127.0.0.1:8000/api/scholarships/admin/${scholarshipId}/status/`,
+        `https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/admin/${scholarshipId}/status/`,
         {
           method: "PUT",
 

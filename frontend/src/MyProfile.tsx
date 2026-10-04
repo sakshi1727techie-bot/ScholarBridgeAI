@@ -59,7 +59,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ onBack }) => {
             }
 
             const response = await fetch(
-                "http://127.0.0.1:8000/student/api/profile/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/student/api/profile/",
                 {
                     method: "GET",
                     headers: {
@@ -144,7 +144,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ onBack }) => {
             }
 
             const response = await fetch(
-                "http://127.0.0.1:8000/student/api/profile/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/student/api/profile/",
                 {
                     method: "PUT",
                     headers: {

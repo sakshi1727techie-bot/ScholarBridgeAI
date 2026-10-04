@@ -105,7 +105,7 @@ const AIRecommendationManagement: React.FC<
         // -------------------------------------------------
 
         const response = await fetch(
-          "http://127.0.0.1:8000/recommendations/api/admin/",
+          "https://scholarbridgeai-1-dkm7.onrender.com/recommendations/api/admin/",
           {
             method: "GET",
 

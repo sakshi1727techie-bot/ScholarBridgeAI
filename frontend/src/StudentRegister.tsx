@@ -125,7 +125,7 @@ export default function StudentRegister({
             setLoading(true);
 
             const response = await fetch(
-                "http://127.0.0.1:8000/api/accounts/register/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/api/accounts/register/",
                 {
                     method: "POST",
                     headers: {

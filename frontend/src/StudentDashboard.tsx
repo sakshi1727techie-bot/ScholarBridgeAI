@@ -523,7 +523,7 @@ const StudentDashboard = ({
             /* ---------- Applications ---------- */
 
             fetch(
-                "http://127.0.0.1:8000/application/api/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/application/api/",
                 {
                     headers: {
                         Authorization:
@@ -567,7 +567,7 @@ const StudentDashboard = ({
             /* ---------- Notifications ---------- */
 
             fetch(
-                "http://127.0.0.1:8000/api/notifications/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/api/notifications/",
                 {
                     headers: {
                         Authorization:
@@ -611,7 +611,7 @@ const StudentDashboard = ({
             /* ---------- Saved Scholarships ---------- */
 
             fetch(
-                "http://127.0.0.1:8000/api/scholarships/saved/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/saved/",
                 {
                     headers: {
                         Authorization:
@@ -666,7 +666,7 @@ const StudentDashboard = ({
             /* ---------- AI Recommendations ---------- */
 
             fetch(
-                "http://127.0.0.1:8000/recommendations/api/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/recommendations/api/",
                 {
                     headers: {
                         Authorization:
@@ -739,7 +739,7 @@ const StudentDashboard = ({
             /* ---------- Closing Soon ---------- */
 
             fetch(
-                "http://127.0.0.1:8000/api/scholarships/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/",
                 {
                     headers: {
                         Authorization:

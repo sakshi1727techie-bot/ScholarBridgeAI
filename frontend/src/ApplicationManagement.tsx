@@ -112,7 +112,7 @@ const ApplicationManagement: React.FC = () => {
       // --------------------------------------------------------
 
       const response = await fetch(
-        "http://127.0.0.1:8000/application/api/admin/",
+        "https://scholarbridgeai-1-dkm7.onrender.com/application/api/admin/",
         {
           method: "GET",
 

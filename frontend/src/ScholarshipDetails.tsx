@@ -60,7 +60,7 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
                 setError("");
 
                 const response = await fetch(
-                    `http://127.0.0.1:8000/api/scholarships/${scholarshipId}/details/`
+                    `https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/${scholarshipId}/details/`
                 );
 
                 if (!response.ok) {
@@ -110,7 +110,7 @@ const ScholarshipDetails: React.FC<ScholarshipDetailsProps> = ({
             setApplicationSuccess(false);
 
             const response = await fetch(
-                `http://127.0.0.1:8000/application/api/apply/${scholarshipId}/`,
+                `https://scholarbridgeai-1-dkm7.onrender.com/application/api/apply/${scholarshipId}/`,
                 {
                     method: "POST",
                     headers: {

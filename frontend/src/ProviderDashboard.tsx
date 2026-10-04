@@ -135,7 +135,7 @@ const ProviderDashboard: React.FC<ProviderDashboardProps> = ({
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/provider/api/dashboard/",
+        "https://scholarbridgeai-1-dkm7.onrender.com/provider/api/dashboard/",
         {
           method: "GET",
           headers: {
@@ -194,7 +194,7 @@ const ProviderDashboard: React.FC<ProviderDashboardProps> = ({
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/notifications/",
+        "https://scholarbridgeai-1-dkm7.onrender.com/api/notifications/",
         {
           method: "GET",
           headers: {

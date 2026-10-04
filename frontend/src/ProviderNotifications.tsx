@@ -60,7 +60,7 @@ const ProviderNotifications: React.FC<
     useState<boolean>(false);
 
   const API_BASE_URL =
-    "http://127.0.0.1:8000";
+    "https://scholarbridgeai-1-dkm7.onrender.com";
 
   // =====================================================
   // GET PROVIDER TOKEN

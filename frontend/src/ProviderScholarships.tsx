@@ -100,7 +100,7 @@ const ProviderScholarships: React.FC<
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/scholarships/provider/",
+        "https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/provider/",
         {
           method: "GET",
           headers: {
@@ -164,7 +164,7 @@ const ProviderScholarships: React.FC<
         }
 
         const response = await fetch(
-          "http://127.0.0.1:8000/api/notifications/",
+          "https://scholarbridgeai-1-dkm7.onrender.com/api/notifications/",
           {
             method: "GET",
             headers: {

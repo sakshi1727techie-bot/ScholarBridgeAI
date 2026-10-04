@@ -50,7 +50,7 @@ const AIRecommendations: React.FC<AIRecommendationsProps> = ({
                 }
 
                 const response = await fetch(
-                    "http://127.0.0.1:8000/recommendations/api/",
+                    "https://scholarbridgeai-1-dkm7.onrender.com/recommendations/api/",
                     {
                         method: "GET",
                         headers: {

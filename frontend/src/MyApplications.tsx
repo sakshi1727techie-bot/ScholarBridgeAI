@@ -42,7 +42,7 @@ const MyApplications: React.FC<MyApplicationsProps> = ({
                 }
 
                 const response = await fetch(
-                    "http://127.0.0.1:8000/application/api/",
+                    "https://scholarbridgeai-1-dkm7.onrender.com/application/api/",
                     {
                         method: "GET",
                         headers: {

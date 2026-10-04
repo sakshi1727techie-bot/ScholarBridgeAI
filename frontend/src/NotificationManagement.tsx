@@ -106,7 +106,7 @@ const NotificationManagement: React.FC = () => {
 
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/notifications/admin/",
+        "https://scholarbridgeai-1-dkm7.onrender.com/api/notifications/admin/",
         {
           method: "GET",
 

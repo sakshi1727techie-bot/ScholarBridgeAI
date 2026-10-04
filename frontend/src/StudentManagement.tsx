@@ -63,7 +63,7 @@ const StudentManagement: React.FC<StudentManagementProps> = ({
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/student/api/admin/students/",
+        "https://scholarbridgeai-1-dkm7.onrender.com/student/api/admin/students/",
         {
           method: "GET",
           headers: {

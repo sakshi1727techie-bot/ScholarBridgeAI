@@ -197,7 +197,7 @@ const ProviderStudentDetails: React.FC<
                 }
 
                 const response = await fetch(
-                    `http://127.0.0.1:8000/application/api/provider/${applicationId}/student-details/`,
+                    `https://scholarbridgeai-1-dkm7.onrender.com/application/api/provider/${applicationId}/student-details/`,
                     {
                         method: "GET",
                         headers: {
@@ -286,7 +286,7 @@ const ProviderStudentDetails: React.FC<
 
                     const response =
                         await fetch(
-                            `http://127.0.0.1:8000/documents/api/provider/application/${applicationId}/documents/`,
+                            `https://scholarbridgeai-1-dkm7.onrender.com/documents/api/provider/application/${applicationId}/documents/`,
                             {
                                 method: "GET",
                                 headers: {
@@ -372,7 +372,7 @@ const ProviderStudentDetails: React.FC<
 
                 const response =
                     await fetch(
-                        `http://127.0.0.1:8000/documents/api/provider/document/${documentId}/verify/`,
+                        `https://scholarbridgeai-1-dkm7.onrender.com/documents/api/provider/document/${documentId}/verify/`,
                         {
                             method: "PATCH",
                             headers: {

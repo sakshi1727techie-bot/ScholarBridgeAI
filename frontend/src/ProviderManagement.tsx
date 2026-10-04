@@ -71,7 +71,7 @@ const ProviderManagement: React.FC<ProviderManagementProps> = ({
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/provider/api/admin/providers/",
+        "https://scholarbridgeai-1-dkm7.onrender.com/provider/api/admin/providers/",
         {
           method: "GET",
           headers: {
@@ -213,7 +213,7 @@ const ProviderManagement: React.FC<ProviderManagementProps> = ({
       }
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/admin/providers/${providerId}/verify/`,
+        `https://scholarbridgeai-1-dkm7.onrender.com/api/admin/providers/${providerId}/verify/`,
         {
           method: "PUT",
           headers: {

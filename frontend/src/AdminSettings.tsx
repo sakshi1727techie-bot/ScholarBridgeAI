@@ -28,13 +28,13 @@ interface PasswordChangeResponse {
 }
 
 const SETTINGS_API =
-  "http://127.0.0.1:8000/api/admin/settings/";
+  "https://scholarbridgeai-1-dkm7.onrender.com/api/admin/settings/";
 
 const RESET_SETTINGS_API =
-  "http://127.0.0.1:8000/api/admin/settings/reset/";
+  "https://scholarbridgeai-1-dkm7.onrender.com/api/admin/settings/reset/";
 
 const CHANGE_PASSWORD_API =
-  "http://127.0.0.1:8000/api/accounts/admin-change-password/";
+  "https://scholarbridgeai-1-dkm7.onrender.com/api/accounts/admin-change-password/";
 
 const AdminSettings: React.FC = () => {
   const [settings, setSettings] = useState<AdminSettingsData>({

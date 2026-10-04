@@ -37,7 +37,7 @@ const SavedScholarships: React.FC<SavedScholarshipsProps> = ({
             }
 
             const response = await fetch(
-                "http://127.0.0.1:8000/api/scholarships/saved/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/api/scholarships/saved/",
                 {
                     method: "GET",
                     headers: {

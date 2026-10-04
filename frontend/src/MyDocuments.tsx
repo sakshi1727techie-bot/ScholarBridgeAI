@@ -137,7 +137,7 @@ const MyDocuments: React.FC<MyDocumentsProps> = ({
             }
 
             const response = await fetch(
-                "http://127.0.0.1:8000/documents/api/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/documents/api/",
                 {
                     method: "GET",
                     headers: {
@@ -191,7 +191,7 @@ const MyDocuments: React.FC<MyDocumentsProps> = ({
             }
 
             const response = await fetch(
-                "http://127.0.0.1:8000/application/api/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/application/api/",
                 {
                     method: "GET",
                     headers: {
@@ -347,7 +347,7 @@ const MyDocuments: React.FC<MyDocumentsProps> = ({
             );
 
             const response = await fetch(
-                "http://127.0.0.1:8000/documents/api/upload/",
+                "https://scholarbridgeai-1-dkm7.onrender.com/documents/api/upload/",
                 {
                     method: "POST",
 
