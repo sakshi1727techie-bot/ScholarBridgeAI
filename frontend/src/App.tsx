@@ -18,7 +18,7 @@ import StudentRegister from "./StudentRegister";
 import StudentForgotPassword from "./StudentForgotPassword";
 import StudentDashboard from "./StudentDashboard";
 
-import ProviderLogin from "./Provider login";
+import ProviderLogin from "./ProviderLogin";
 import ProviderRegister from "./Provider Register";
 import ProviderForgotPassword from "./Provider Forgot Password";
 import ProviderDashboard from "./ProviderDashboard";
